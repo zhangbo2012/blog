@@ -1,0 +1,1019 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  编程之路
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="编程之路" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">编程之路</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 编程之路</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>mac</label></li>
+
+          
+            <li><a title="关于12' MacBook使用的记录" href="macbook12.html">关于12' MacBook使用的记录</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>python</label></li>
+
+          
+            <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html.html">用python分析了20万场吃鸡数据</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>mac</span></li>
+                        
+                          <li><a title="关于12' MacBook使用的记录" href="macbook12.html">关于12' MacBook使用的记录</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>python</span></li>
+                        
+                          <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html.html">用python分析了20万场吃鸡数据</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ 
+
+
+	
+		<div class="markdown-body">
+		<h1>用python分析了20万场吃鸡数据</h1>
+
+		<ul>
+<li>
+<a href="#toc_0">背景</a>
+</li>
+<li>
+<a href="#toc_1">Step 1 分析数据接口</a>
+<ul>
+<li>
+<a href="#toc_2">使用Charles抓包</a>
+<ul>
+<li>
+<a href="#toc_3">抓包实现</a>
+</li>
+<li>
+<a href="#toc_4">https加密流量的处理</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_5">数据接口</a>
+<ul>
+<li>
+<a href="#toc_6">1. 获取用户信息接口</a>
+</li>
+<li>
+<a href="#toc_7">2. 获取用户战绩列表接口</a>
+</li>
+<li>
+<a href="#toc_8">3. 获取用户战绩详情接口</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_9">Step 2 爬取数据</a>
+<ul>
+<li>
+<a href="#toc_10">使用requests请求接口获取数据</a>
+</li>
+<li>
+<a href="#toc_11">使用redis来标记已经爬取过的信息</a>
+</li>
+<li>
+<a href="#toc_12">使用celery来管理队列</a>
+</li>
+<li>
+<a href="#toc_13">开始抓取</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_14">Step 3 数据分析</a>
+<ul>
+<li>
+<a href="#toc_15">分析方案</a>
+</li>
+<li>
+<a href="#toc_16">分析结果</a>
+<ul>
+<li>
+<a href="#toc_17">1. 平均用户日在线时长2小时</a>
+</li>
+<li>
+<a href="#toc_18">2. 女性角色被救次数高于男性</a>
+</li>
+<li>
+<a href="#toc_19">3. 女性角色救人次数高于男性</a>
+</li>
+<li>
+<a href="#toc_20">4. 周五大家最忙</a>
+</li>
+<li>
+<a href="#toc_21">5. 晚上22点是游戏高峰</a>
+</li>
+<li>
+<a href="#toc_22">6. 最远击杀距离639米</a>
+</li>
+<li>
+<a href="#toc_23">7. 能拿到 救死扶伤 称号才是最高荣耀</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_24">结尾</a>
+</li>
+</ul>
+
+
+<hr>
+
+<p>首先，神枪镇楼<br/>
+<img src="media/15310632907202/15310635540917.jpg" alt=""/></p>
+
+<h2 id="toc_0">背景</h2>
+
+<p>最近老板爱上了吃鸡（手游：全军出击），经常拉着我们开黑，只能放弃午休的时间，陪老板在沙漠里奔波。</p>
+
+<p>上周在在微信游戏频道看战绩的时候突发奇想，是不是可以通过这个方式抓取到很多战斗数据，然后分析看看有什么规律。</p>
+
+<p><img src="media/15310632907202/15311076652700.jpg" alt="" style="width:307px;"/></p>
+
+<blockquote>
+<p>秀一波战绩，开黑情况下我们团队吃鸡率非常高，近100场吃鸡次数51次</p>
+</blockquote>
+
+<p>简单评估了一下，觉得可行，咱就撸起袖子干。</p>
+
+<h2 id="toc_1">Step 1 分析数据接口</h2>
+
+<p>第一步当然是把这些战绩数据采集下来，首先我们需要了解页面背后的故事。去看看页面是如何获取战斗数据的。</p>
+
+<h3 id="toc_2">使用Charles抓包</h3>
+
+<h4 id="toc_3">抓包实现</h4>
+
+<p>在Mac下推荐使用工具Charles来从协议层抓取手机上的流量，原理就是在Mac上开启一个代理服务器，然后将手机的网络代理设置为Mac，这样手机上的所有流量都会经过我们的代理服务器了。</p>
+
+<p>大致流程如下：</p>
+
+<pre><code class="language-sequence">participant iPhone
+participant MacBook Charles
+participant 微信平台
+
+iPhone-&gt;MacBook Charles:请求game.weixin.qq.com
+MacBook Charles-&gt;微信平台:转发请求
+微信平台--&gt;MacBook Charles:响应
+MacBook Charles--&gt;iPhone:转发响应
+</code></pre>
+
+<h4 id="toc_4">https加密流量的处理</h4>
+
+<p>在实际操作的时候发现微信所有的流量都走了HTTPS，导致我们的抓到的都是加密数据，对我们没有任何参考意义。</p>
+
+<p>经过研究，可以通过在手机和电脑都安装Charles根证书的方式来实现对Https流量的分析，具体操作可以参考：</p>
+
+<ul>
+<li><a href="https://blog.csdn.net/qq_30259339/article/details/53981448">charles mac下https抓包和iphone https抓包</a></li>
+<li><a href="https://www.jianshu.com/p/4005cf4f370d">解决Charles无法正常抓包iOS 11中的Https请求</a></li>
+</ul>
+
+<p>安装证书后，我们的流量大致是这样子的</p>
+
+<pre><code class="language-sequence">participant iPhone
+participant MacBook Charles
+participant 微信平台
+
+iPhone-&gt;MacBook Charles:https握手请求
+MacBook Charles-&gt;MacBook Charles:假装自己是服务器
+MacBook Charles--&gt;iPhone:响应加密算法和证书A
+iPhone-&gt;MacBook Charles:https GET请求
+MacBook Charles-&gt;MacBook Charles:按A 解密https请求
+MacBook Charles-&gt;微信平台:https握手请求
+微信平台--&gt;MacBook Charles:响应加密算法和证书B
+MacBook Charles-&gt;微信平台:按B加密 https GET请求
+微信平台--&gt;MacBook Charles:response
+MacBook Charles-&gt;MacBook Charles:按B 解密response
+MacBook Charles--&gt;iPhone:响应按A 加密response
+iPhone-&gt;iPhone:按A解密response
+</code></pre>
+
+<p>经过上述的配置，我们已经可以读取到https的请求和响应数据了，如下图所示。</p>
+
+<p><img src="media/15310632907202/15310659449947.jpg" alt=""/></p>
+
+<blockquote>
+<ul>
+<li>windows下用findler可以实现相同的功能</li>
+<li>其实这就是一个非常典型的中间人场景</li>
+</ul>
+</blockquote>
+
+<h3 id="toc_5">数据接口</h3>
+
+<p>接下来就根据这些数据来找出我们需要的接口了，经过分析，主要涉及三个接口</p>
+
+<ul>
+<li>获取用户信息接口</li>
+<li>获取用户战绩列表接口</li>
+<li>获取用户指定战绩详细信息接口</li>
+</ul>
+
+<p>下面我们一个一个看</p>
+
+<h4 id="toc_6">1. 获取用户信息接口</h4>
+
+<ul>
+<li><p>request</p>
+
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>/cgi-bin/gamewap/getpubgmdatacenterindex</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>方法</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>openid、pass_ticket</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>key pass_ticket、uin、pgv_pvid、sd_cookie_crttime、sd_userid</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>response</p>
+
+<pre><code class="language-json">{
+    &quot;user_info&quot;: {
+        &quot;openid&quot;: &quot;oODfo0pjBQkcNuR4XLTQ321xFVws&quot;,
+        &quot;head_img_url&quot;: &quot;http://wx.qlogo.cn/mmhead/Q3auHgzwzM5hSWxxxxxUQPwW9ibxxxx9DlxLTsKWk97oWpDI0rg/96&quot;,
+        &quot;nick_name&quot;: &quot;望&quot;,
+        &quot;role_name&quot;: &quot;xxxx&quot;,
+        &quot;zone_area_id&quot;: 0,
+        &quot;plat_id&quot;: 1
+    },
+    &quot;battle_info&quot;: {
+        &quot;total_1&quot;: 75,
+        &quot;total_10&quot;: 336,
+        &quot;total_game&quot;: 745,
+        &quot;total_kill&quot;: 1669
+    },
+    &quot;battle_list&quot;: [{
+        &quot;map_id&quot;: 1,
+        &quot;room_id&quot;: &quot;6575389198189071197&quot;,
+        &quot;team_id&quot;: 57,
+        &quot;dt_event_time&quot;: 1530953799,
+        &quot;rank_in_ds&quot;: 3,
+        &quot;times_kill&quot;: 1,
+        &quot;label&quot;: &quot;前五&quot;,
+        &quot;team_type&quot;: 1,
+        &quot;award_gold&quot;: 677,
+        &quot;mode&quot;: 0
+    }],
+    &quot;appitem&quot;: {
+        &quot;AppID&quot;: &quot;wx13051697527efc45&quot;,
+        &quot;IconURL&quot;: &quot;https://mmocgame.qpic.cn/wechatgame/mEMdfrX5RU0dZFfNEdCsMJpfsof1HE0TP3cfZiboX0ZPxqh5aZnHjxPFXUGgsXmibe/0&quot;,
+        &quot;Name&quot;: &quot;绝地求生 全军出击&quot;,
+        &quot;BriefName&quot;: &quot;绝地求生 全军出击&quot;,
+        &quot;Desc&quot;: &quot;官方正版绝地求生手游&quot;,
+        &quot;Brief&quot;: &quot;枪战 | 808.2M&quot;,
+        &quot;WebURL&quot;: &quot;https://game.weixin.qq.com/cgi-bin/h5/static/detail_v2/index.html?wechat_pkgid=detail_v2&amp;appid=wx13051697527efc45&amp;show_bubble=0&quot;,
+        &quot;DownloadInfo&quot;: {
+            &quot;DownloadURL&quot;: &quot;https://itunes.apple.com/cn/app/id1304987143&quot;,
+            &quot;DownloadFlag&quot;: 5
+        },
+        &quot;Status&quot;: 0,
+        &quot;AppInfoFlag&quot;: 45,
+        &quot;Label&quot;: [],
+        &quot;AppStorePopUpDialogConfig&quot;: {
+            &quot;Duration&quot;: 1500,
+            &quot;Interval&quot;: 172800,
+            &quot;ServerTimestamp&quot;: 1531066098
+        },
+        &quot;HasEnabledChatGroup&quot;: false,
+        &quot;AppType&quot;: 0,
+        &quot;game_tag_list&quot;: [&quot;绝地求生&quot;, &quot;正版还原&quot;, &quot;好友开黑&quot;, &quot;百人对战&quot;, &quot;超大地图&quot;],
+        &quot;recommend_reason&quot;: &quot;正版绝地求生，荒野射击&quot;,
+        &quot;size_desc&quot;: &quot;808.2M&quot;
+    },
+    &quot;is_guest&quot;: true,
+    &quot;is_blocked&quot;: false,
+    &quot;errcode&quot;: 0,
+    &quot;errmsg&quot;: &quot;ok&quot;
+}
+</code></pre></li>
+<li><p>分析</p>
+
+<p>openid是用户的惟一标识。</p></li>
+</ul>
+
+<h4 id="toc_7">2. 获取用户战绩列表接口</h4>
+
+<ul>
+<li><p>request</p>
+
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>/cgi-bin/gamewap/getpubgmbattlelist</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>方法</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>openid、pass_ticket、plat_id、after_time、limit</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>key pass_ticket、uin、pgv_pvid、sd_cookie_crttime、sd_userid</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>response</p>
+
+<pre><code class="language-json">{
+&quot;errcode&quot;: 0,
+&quot;errmsg&quot;: &quot;ok&quot;,
+&quot;next_after_time&quot;: 1528120556,
+&quot;battle_list&quot;: [{
+    &quot;map_id&quot;: 1,
+    &quot;room_id&quot;: &quot;6575389198111172597&quot;,
+    &quot;team_id&quot;: 57,
+    &quot;dt_event_time&quot;: 1530953799,
+    &quot;rank_in_ds&quot;: 3,
+    &quot;times_kill&quot;: 1,
+    &quot;label&quot;: &quot;前五&quot;,
+    &quot;team_type&quot;: 1,
+    &quot;award_gold&quot;: 677,
+    &quot;mode&quot;: 0
+}, {
+    &quot;map_id&quot;: 1,
+    &quot;room_id&quot;: &quot;6575336498940384115&quot;,
+    &quot;team_id&quot;: 11,
+    &quot;dt_event_time&quot;: 1530941404,
+    &quot;rank_in_ds&quot;: 5,
+    &quot;times_kill&quot;: 2,
+    &quot;label&quot;: &quot;前五&quot;,
+    &quot;team_type&quot;: 1,
+    &quot;award_gold&quot;: 632,
+    &quot;mode&quot;: 0
+}],
+&quot;has_next&quot;: true
+}
+</code></pre></li>
+<li><p>分析</p>
+
+<ul>
+<li>这个接口用after_time来进行分页，遍历获取时可以根据接口响应的has_next和next_after_time来判断是否还有下一页的数据。</li>
+<li>列表里面的room_id是每一场battle的惟一标识。</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_8">3. 获取用户战绩详情接口</h4>
+
+<ul>
+<li><p>request</p>
+
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>/cgi-bin/gamewap/getpubgmbattledetail</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>方法</td>
+<td>GET</td>
+</tr>
+<tr>
+<td>参数</td>
+<td>openid、pass_ticket、room_id</td>
+</tr>
+<tr>
+<td>cookie</td>
+<td>key pass_ticket、uin、pgv_pvid、sd_cookie_crttime、sd_userid</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>response</p>
+
+<pre><code class="language-json">{
+&quot;errcode&quot;: 0,
+&quot;errmsg&quot;: &quot;ok&quot;,
+&quot;base_info&quot;: {
+    &quot;nick_name&quot;: &quot;柚茶&quot;,
+    &quot;head_img_url&quot;: &quot;http://wx.qlogo.cn/mmhead/xxxx/96&quot;,
+    &quot;dt_event_time&quot;: 1528648165,
+    &quot;team_type&quot;: 4,
+    &quot;rank&quot;: 1,
+    &quot;player_count&quot;: 100,
+    &quot;role_sex&quot;: 1,
+    &quot;label&quot;: &quot;大吉大利&quot;,
+    &quot;openid&quot;: &quot;oODfo0s1w5lWjmxxxxxgQkcCljXQ&quot;
+},
+&quot;battle_info&quot;: {
+    &quot;award_gold&quot;: 622,
+    &quot;times_kill&quot;: 6,
+    &quot;times_head_shot&quot;: 0,
+    &quot;damage&quot;: 537,
+    &quot;times_assist&quot;: 3,
+    &quot;survival_duration&quot;: 1629,
+    &quot;times_save&quot;: 0,
+    &quot;times_reborn&quot;: 0,
+    &quot;vehicle_kill&quot;: 1,
+    &quot;forward_distance&quot;: 10140,
+    &quot;driving_distance&quot;: 5934,
+    &quot;dead_poison_circle_no&quot;: 6,
+    &quot;top_kill_distance&quot;: 223,
+    &quot;top_kill_distance_weapon_use&quot;: 2924130819,
+    &quot;be_kill_user&quot;: {
+        &quot;nick_name&quot;: &quot;小旭&quot;,
+        &quot;head_img_url&quot;: &quot;http://wx.qlogo.cn/mmhead/ibLButGMnqJNFsUtStNEV8tzlH1QpwPiaF9kxxxxx66G3ibjic6Ng2Rcg/96&quot;,
+        &quot;weapon_use&quot;: 20101000001,
+        &quot;openid&quot;: &quot;oODfo0qrPLExxxxc0QKjFPnPxyI&quot;
+    },
+    &quot;label&quot;: &quot;大吉大利&quot;
+},
+&quot;team_info&quot;: {
+    &quot;user_list&quot;: [{
+        &quot;nick_name&quot;: &quot;ooo&quot;,
+        &quot;times_kill&quot;: 6,
+        &quot;assist_count&quot;: 3,
+        &quot;survival_duration&quot;: 1638,
+        &quot;award_gold&quot;: 632,
+        &quot;head_img_url&quot;: &quot;http://wx.qlogo.cn/mmhead/Q3auHgzwzM4k4RXdyxavNxxxxUjcX6Tl47MNNV1dZDliazRKRg&quot;,
+        &quot;openid&quot;: &quot;oODfo0xxxxf1bRAXE-q-lEezK0k&quot;
+    }, {
+        &quot;nick_name&quot;: &quot;我吃炒肉&quot;,
+        &quot;times_kill&quot;: 2,
+        &quot;assist_count&quot;: 2,
+        &quot;survival_duration&quot;: 1502,
+        &quot;award_gold&quot;: 583,
+        &quot;head_img_url&quot;: &quot;http://wx.qlogo.cn/mmhead/sTJptKvBQLKd5SAAjOF0VrwiapUxxxxFffxoDUcrVjYbDf9pNENQ&quot;,
+        &quot;openid&quot;: &quot;oODfo0gIyDxxxxZpUrSrpapZSDT0&quot;
+    }]
+},
+&quot;is_guest&quot;: true,
+&quot;is_blocked&quot;: false
+}
+</code></pre></li>
+<li><p>分析</p>
+
+<ul>
+<li>这个接口响应了战斗的详细信息，包括杀人数、爆头数、救人数、跑动距离等等，足够我们分析了。</li>
+<li>这个接口还响应了是被谁杀死的以及组团成员的openid，利用这个特性我们这可无限深度的发散爬取更多用户的数据。</li>
+</ul></li>
+</ul>
+
+<p>至于cookie中的息pass_ticket等信息肯定是用于权限认证的，在上述的几次请求中这些信息都没有变化，所以我们不需要深研其是怎么算出来的，只需要抓包提取到默认信息后填到代码里面就可以用了。</p>
+
+<h2 id="toc_9">Step 2 爬取数据</h2>
+
+<p>接口已经确定下来了，接下来就是去抓取足够量的数据了。</p>
+
+<h3 id="toc_10">使用requests请求接口获取数据</h3>
+
+<pre><code class="language-python">
+    url = &#39;https://game.weixin.qq.com/cgi-bin/gamewap/getpubgmdatacenterindex?openid=%s&amp;plat_id=0&amp;uin=&amp;key=&amp;pass_ticket=%s&#39; % (openid, settings.pass_ticket)
+    r = requests.get(url=url, cookies=settings.def_cookies, headers=settings.def_headers, timeout=(5.0, 5.0))
+    tmp = r.json()
+    wfile = os.path.join(settings.Res_UserInfo_Dir, &#39;%s.txt&#39; % (rediskeys.user(openid)))
+
+    with codecs.open(wfile, &#39;w&#39;, &#39;utf-8&#39;) as wf:
+        wf.write(simplejson.dumps(tmp, indent=2, sort_keys=True, ensure_ascii=False))
+
+</code></pre>
+
+<p>参照这种方式我们可以很快把另外两个接口写好。</p>
+
+<h3 id="toc_11">使用redis来标记已经爬取过的信息</h3>
+
+<p>在上述接口中我们可能从用户A的入口进去找到用户B的openid，然后从用户B的入口进去又找到用户A的openid，为了避免重复采集，所以我们需要记录下哪些信息是我们采集过的。</p>
+
+<p>核心代码片断</p>
+
+<pre><code class="language-python"># rediskeys.user_battle_list 根据openid获取存在redis中的key值
+def user_battle_list(openid):
+    return &#39;ubl_%s&#39; % (openid)
+</code></pre>
+
+<pre><code class="language-python"># 在提取battle list之前，首先判断这用用户的数据是否已经提取过了
+if settings.DataRedis.get(rediskeys.user_battle_list(openid)):
+        return True
+</code></pre>
+
+<pre><code class="language-python"># 在提取battle list之后，需要在redis中记录用户信息
+settings.DataRedis.set(rediskeys.user_battle_list(openid), 1)
+</code></pre>
+
+<h3 id="toc_12">使用celery来管理队列</h3>
+
+<p>celery是一个非常好用的分布式队列管理工具，我这次只打算在我自己的电脑上运行，所以并没有用到分布式的功能。</p>
+
+<p>我们创建三个task和三个queue</p>
+
+<pre><code class="language-python">task_queues = (
+    Queue(&#39;queue_get_battle_info&#39;, exchange=Exchange(&#39;priority&#39;, type=&#39;direct&#39;), routing_key=&#39;gbi&#39;),
+    Queue(&#39;queue_get_battle_list&#39;, exchange=Exchange(&#39;priority&#39;, type=&#39;direct&#39;), routing_key=&#39;gbl&#39;),
+    Queue(&#39;queue_get_user_info&#39;, exchange=Exchange(&#39;priority&#39;, type=&#39;direct&#39;), routing_key=&#39;gui&#39;),
+)
+
+task_routes = ([
+    (&#39;get_battle_info&#39;, {&#39;queue&#39;: &#39;queue_get_battle_info&#39;}),
+    (&#39;get_battle_list&#39;, {&#39;queue&#39;: &#39;queue_get_battle_list&#39;}),
+    (&#39;get_user_info&#39;, {&#39;queue&#39;: &#39;queue_get_user_info&#39;}),
+],)
+</code></pre>
+
+<p>然后在task中控制API请求和Redis数据实现完整的任务逻辑，如：</p>
+
+<pre><code class="language-python">@app.task(name=&#39;get_battle_list&#39;)
+def get_battle_list(openid, plat_id=None, after_time=0, update_time=None):
+    # 判断是否已经取过用户战绩列表信息
+    if settings.DataRedis.get(rediskeys.user_battle_list(openid)):
+        return True
+
+    if not plat_id:
+        try:
+            # 提取用户信息
+            us = handles.get_user_info_handles(openid)
+            plat_id=us[&#39;plat_id&#39;]
+        except Exception as e:
+            print &#39;can not get user plat_id&#39;, openid, traceback.format_exc()
+            return False
+    # 提取战绩列表
+    battle_list = handles.get_battle_list_handle(openid, plat_id, after_time=0, update_time=None)
+    
+    # 为每一场战斗创建异步获取详情任务
+    for room_id in battle_list:
+        if not settings.DataRedis.get(rediskeys.user_battle(openid, room_id)):
+            get_battle_info.delay(openid, plat_id, room_id)
+
+    return True
+</code></pre>
+
+<h3 id="toc_13">开始抓取</h3>
+
+<p>因为我们是发散是爬虫，所以需要给代码一个用户的入口，所以需要手动创建一个用户的采集任务</p>
+
+<pre><code class="language-python">from tasks.all import get_battle_list
+
+my_openid = &#39;oODfo0oIErZI2xxx9xPlVyQbRPgY&#39;
+my_platid = &#39;0&#39;
+
+get_battle_list.delay(my_openid, my_platid, after_time=0, update_time=None)
+</code></pre>
+
+<p>有入口之后我们就用celery来启动worker去开始爬虫</p>
+
+<pre><code class="language-bash"># 启动获取用户详情worker
+celery -A tasks.all worker -c 5 --queue=queue_get_user_info --loglevel=info -n get_user_info@%h
+
+# 启动获取战绩列表worker
+celery -A tasks.all worker -c 5 --queue=queue_get_battle_list --loglevel=info -n get_battle_list@%h
+
+# 启动获取战绩详情worker
+celery -A tasks.all worker -c 30 --queue=queue_get_battle_info --loglevel=info -n get_battle_info@%h
+</code></pre>
+
+<p>这样我们的爬虫就可以愉快的跑起来了。再通过celery-flower来查看执行情况。</p>
+
+<pre><code class="language-bash">celery flower -A tasks.all --broker=redis://:$REDIS_PASS@$REDIS_HOST:$REDIS_PORT/10
+</code></pre>
+
+<p>通过flower，我们可以看到运行的效率还是非常不错的。</p>
+
+<p><img src="media/15310632907202/15308449650665.jpg" alt="15308449650665"/></p>
+
+<p>在执行过程中会发现get_battle_list跑太快，导致get_battle_info即使开了30个并发都还会积压很多，所以需要适时的去停一下这些worker。</p>
+
+<p>在我们抓到20万条信息之后就可以停下来了。</p>
+
+<h2 id="toc_14">Step 3 数据分析</h2>
+
+<h3 id="toc_15">分析方案</h3>
+
+<p>20万场战斗的数据已经抓取好了，全部分成json文件存在我本地磁盘上，接下来就做一些简单的分析。</p>
+
+<p>python在数据分析领域也非常强大，有很多非常优秀的库，如pandas和NumPy，可惜我都没有学过，而且对于一个高考数学只考了70几分的人来说，数据分析实在是难，所以就自己写了一个非常简单的程序来做一些浅度分析。</p>
+
+<p>需要进行深度分析，又不想自己爬虫的大牛可以联系我打包这些数据。</p>
+
+<pre><code class="language-python">
+# coding=utf-8
+import os
+import json
+import datetime
+import math
+
+from conf import settings
+
+
+class UserTeamTypeData:
+    def __init__(self, team_type, player_count):
+        self.team_type = team_type
+        self.player_count = player_count
+        self.label = {}
+        self.dead_poison_circle_no = {}
+        self.count = 0
+        self.damage = 0
+        self.survival_duration = 0  # 生存时间
+        self.driving_distance = 0
+        self.forward_distance = 0
+        self.times_assist = 0  # 助攻
+        self.times_head_shot = 0
+        self.times_kill = 0
+        self.times_reborn = 0  # 被救次数
+        self.times_save = 0  # 救人次数
+        self.top_kill_distance = []
+        self.top_kill_distance_weapon_use = {}
+        self.vehicle_kill = 0  # 车辆杀死
+        self.award_gold = 0
+        self.times_reborn_by_role_sex = {0: 0, 1: 0}  # 0 男 1 女
+        self.times_save_by_role_sex = {0: 0, 1: 0}  # 0 男 1 女
+
+    def update_dead_poison_circle_no(self, dead_poison_circle_no):
+        if dead_poison_circle_no in self.dead_poison_circle_no:
+            self.dead_poison_circle_no[dead_poison_circle_no] += 1
+        else:
+            self.dead_poison_circle_no[dead_poison_circle_no] = 1
+
+    def update_times_reborn_and_save_by_role_sex(self, role, times_reborn, times_save):
+        if role not in self.times_reborn_by_role_sex:
+            return
+
+        self.times_reborn_by_role_sex[role] += times_reborn
+        self.times_save_by_role_sex[role] += times_save
+
+    def update_top_kill_distance_weapon_use(self, weaponid):
+        if weaponid not in self.top_kill_distance_weapon_use:
+            self.top_kill_distance_weapon_use[weaponid] = 1
+        else:
+            self.top_kill_distance_weapon_use[weaponid] += 1
+
+
+class UserBattleData:
+
+    def __init__(self, openid):
+        self.openid = openid
+        self.team_type_res = {}
+        self.label = {}
+        self.hour_counter = {}
+        self.weekday_counter = {}
+        self.usetime = 0
+        self.day_record = set()
+        self.battle_counter = 0
+
+    def get_avg_use_time_per_day(self):
+        # print &quot;get_avg_use_time_per_day:&quot;, self.openid, self.usetime, len(self.day_record), self.usetime / len(self.day_record)
+        return self.usetime / len(self.day_record)
+
+    def update_label(self, lable):
+        if lable in self.label:
+            self.label[lable] += 1
+        else:
+            self.label[lable] = 1
+
+    def get_team_type_data(self, team_type, player_count):
+        player_count = int(math.ceil(float(player_count) / 10))
+        team_type_key = &#39;%d_%d&#39; % (team_type, player_count)
+
+        if team_type_key not in self.team_type_res:
+            userteamtypedata = UserTeamTypeData(team_type, player_count)
+            self.team_type_res[team_type_key] = userteamtypedata
+        else:
+            userteamtypedata = self.team_type_res[team_type_key]
+
+        return userteamtypedata
+
+    def update_user_time_property(self, dt_event_time):
+        dt_event_time = datetime.datetime.fromtimestamp(dt_event_time)
+        hour = dt_event_time.hour
+        if hour in self.hour_counter:
+            self.hour_counter[hour] += 1
+        else:
+            self.hour_counter[hour] = 1
+
+        weekday = dt_event_time.weekday()
+        if weekday in self.weekday_counter:
+            self.weekday_counter[weekday] += 1
+        else:
+            self.weekday_counter[weekday] = 1
+
+        self.day_record.add(dt_event_time.date())
+
+    def update_battle_info_by_room(self, roomid):
+        # print &#39;  load &#39;, self.openid, roomid
+        file = os.path.join(settings.Res_UserBattleInfo_Dir, self.openid, &#39;%s.txt&#39; % roomid)
+
+        with open(file, &#39;r&#39;) as rf:
+            battledata = json.load(rf)
+
+        self.battle_counter += 1
+        base_info = battledata[&#39;base_info&#39;]
+        self.update_user_time_property(base_info[&#39;dt_event_time&#39;])
+        battle_info = battledata[&#39;battle_info&#39;]
+
+        userteamtypedata = self.get_team_type_data(base_info[&#39;team_type&#39;], base_info[&#39;player_count&#39;])
+        userteamtypedata.count += 1
+        userteamtypedata.award_gold += battle_info[&#39;award_gold&#39;]
+        userteamtypedata.damage += battle_info[&#39;damage&#39;]
+        userteamtypedata.update_dead_poison_circle_no(battle_info[&#39;dead_poison_circle_no&#39;])
+        userteamtypedata.driving_distance += battle_info[&#39;driving_distance&#39;]
+        userteamtypedata.forward_distance += battle_info[&#39;forward_distance&#39;]
+        self.update_label(battle_info[&#39;label&#39;])
+        userteamtypedata.survival_duration += battle_info[&#39;survival_duration&#39;]
+        self.usetime += battle_info[&#39;survival_duration&#39;]/60
+        userteamtypedata.times_assist += battle_info[&#39;times_assist&#39;]
+        userteamtypedata.times_head_shot += battle_info[&#39;times_head_shot&#39;]
+        userteamtypedata.times_kill += battle_info[&#39;times_kill&#39;]
+        userteamtypedata.times_reborn += battle_info[&#39;times_reborn&#39;]
+        userteamtypedata.times_save += battle_info[&#39;times_save&#39;]
+        userteamtypedata.damage += battle_info[&#39;damage&#39;]
+        userteamtypedata.top_kill_distance.append(battle_info[&#39;top_kill_distance&#39;])
+        userteamtypedata.update_times_reborn_and_save_by_role_sex(base_info[&#39;role_sex&#39;], battle_info[&#39;times_reborn&#39;],
+                                                                  battle_info[&#39;times_save&#39;])
+
+    def get_user_battleinfo_rooms(self):
+        user_dir = os.path.join(settings.Res_UserBattleInfo_Dir, self.openid)
+        r = [room for room in os.listdir(user_dir)]
+        r = [rr.replace(&#39;.txt&#39;, &#39;&#39;) for rr in r]
+        return r
+
+class AllUserCounter:
+
+    def __init__(self):
+        self.hour_counter = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0, 14: 0, 15: 0, 16: 0, 17: 0, 18: 0, 19: 0, 20: 0, 21: 0, 22: 0, 23: 0}
+
+        self.weekday_counter = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+        self.times_reborn_by_role_sex = {0: 0, 1: 0}  # 0 男 1 女
+        self.times_save_by_role_sex = {0: 0, 1: 0}  # 0 男 1 女
+        self.user_count = 0
+        self.battle_count = 0
+        self.every_user_use_time_per_day = []
+        self.top_kill_distance = 0
+
+    def avg_use_time(self):
+        return sum(self.every_user_use_time_per_day) / len(self.every_user_use_time_per_day)
+
+    def add_user_data(self, userbattledata):
+        self.every_user_use_time_per_day.append(userbattledata.get_avg_use_time_per_day())
+        self.battle_count += userbattledata.battle_counter
+        self.user_count += 1
+
+        for k in userbattledata.hour_counter:
+            if k in self.hour_counter:
+                self.hour_counter[k] += userbattledata.hour_counter[k]
+            else:
+                self.hour_counter[k] = userbattledata.hour_counter[k]
+
+        for weekday in userbattledata.weekday_counter:
+            if weekday in self.weekday_counter:
+                self.weekday_counter[weekday] += userbattledata.weekday_counter[weekday]
+            else:
+                self.weekday_counter[weekday] = userbattledata.weekday_counter[weekday]
+
+        for userteamtype in userbattledata.team_type_res:
+            userteamtypedata = userbattledata.team_type_res[userteamtype]
+            for k in userteamtypedata.times_reborn_by_role_sex:
+                self.times_reborn_by_role_sex[k] += userteamtypedata.times_reborn_by_role_sex[k]
+
+            for k in userteamtypedata.times_save_by_role_sex:
+                self.times_save_by_role_sex[k] += userteamtypedata.times_save_by_role_sex[k]
+
+            if userteamtypedata.top_kill_distance &gt; self.top_kill_distance:
+                self.top_kill_distance = userteamtypedata.top_kill_distance
+
+    def __str__(self):
+        res = []
+        res.append(&#39;总用户数\t%d&#39; % self.user_count)
+        res.append(&#39;总战斗数\t%d&#39; % self.battle_count)
+        res.append(&#39;平均日耗时\t%d&#39; % self.avg_use_time())
+        res.append(&#39;最远击杀\t%d&#39; % max(self.top_kill_distance))
+        res.append(&#39;男性角色\t被救%d次\t救人%d次&#39; % (self.times_reborn_by_role_sex[0], self.times_save_by_role_sex[0]))
+        res.append(&#39;女性角色\t被救%d次\t救人%d次&#39; % (self.times_reborn_by_role_sex[1], self.times_save_by_role_sex[1]))
+
+        res.append(&#39;小时分布&#39;)
+        for hour in range(0, 24):
+            # res.append(&#39;\t%d: %d&#39; % (hour, self.hour_counter[hour]))
+            res.append(&#39;\t%d: %d %.2f%%&#39; % (hour, self.hour_counter[hour], self.hour_counter[hour]/float(self.battle_count)*100))
+        res.append(&#39;星期分布&#39;)
+        # res.append(self.weekday_counter.__str__())
+        for weekday in range(0, 7):
+            res.append(&#39;\t%d: %d %.2f%%&#39; % (weekday+1, self.weekday_counter[weekday], (self.weekday_counter[weekday]/float(self.battle_count)*100)))
+
+        return &#39;\n&#39;.join(res)
+
+
+def get_user_battleinfo_rooms(openid):
+    user_dir = os.path.join(settings.Res_UserBattleInfo_Dir, openid)
+
+    # files = os.listdir(user_dir)
+    r = [room for room in os.listdir(user_dir)]
+    r = [rr.replace(&#39;.txt&#39;, &#39;&#39;) for rr in r]
+    return r
+
+
+if __name__ == &#39;__main__&#39;:
+    alluserconter = AllUserCounter()
+    
+    folders = os.listdir(settings.Res_UserBattleInfo_Dir)
+    i = 0
+    for folder in folders:
+        i+=1
+        print i, &#39;/&#39; , len(folders), folder
+        userbattledata = UserBattleData(folder)
+        for room in userbattledata.get_user_battleinfo_rooms():
+            userbattledata.update_battle_info_by_room(room)
+        alluserconter.add_user_data(userbattledata)
+
+    print &quot;\n&quot; * 3
+    print &quot;---------------------------------------&quot;
+
+    print alluserconter
+</code></pre>
+
+<h3 id="toc_16">分析结果</h3>
+
+<h4 id="toc_17">1. 平均用户日在线时长2小时</h4>
+
+<p><img src="media/15310632907202/15311020770066.jpg" alt=""/></p>
+
+<p>从分布图上看大部分用户都在1小时以上，最猛的几个人超过8小时。</p>
+
+<blockquote>
+<p>注：我这里统计的是每一局的存活时间，实际在线时长会比我这个更长。</p>
+</blockquote>
+
+<h4 id="toc_18">2. 女性角色被救次数高于男性</h4>
+
+<p><img src="media/15310632907202/15311012585793.jpg" alt=""/></p>
+
+<p>终于知道为什么有那么多人妖了，原来在游戏里面可以占便宜啊。</p>
+
+<h4 id="toc_19">3. 女性角色救人次数高于男性</h4>
+
+<p><img src="media/15310632907202/15311012987492.jpg" alt=""/></p>
+
+<p>给了大家一个带妹上分的好理由。</p>
+
+<h4 id="toc_20">4. 周五大家最忙</h4>
+
+<p><img src="media/15310632907202/15310699545478.jpg" alt=""/></p>
+
+<p>估计周五大家都要忙着交差和写周报了。</p>
+
+<h4 id="toc_21">5. 晚上22点是游戏高峰</h4>
+
+<p><img src="media/15310632907202/15311024917841.jpg" alt=""/></p>
+
+<p>凌晨还有那么多人玩，你们不睡觉吗？</p>
+
+<h4 id="toc_22">6. 最远击杀距离639米</h4>
+
+<p>我看了一下98K、SKS和AWP的有效射程，大致都在800米以内，所以这个值可信度还是可以的。</p>
+
+<p>反过来看抖音上的那些超远距离击杀应该都是摆拍的。</p>
+
+<h4 id="toc_23">7. 能拿到 救死扶伤 称号才是最高荣耀</h4>
+
+<p><img src="media/15310632907202/15311041446783.jpg" alt=""/></p>
+
+<p>从分布情况可以看出来，救死扶伤比十杀还要难。</p>
+
+<p><img src="media/15310632907202/15311063423105.jpg" alt=""/><br/>
+能拿到救死扶伤称号的大部分都是女性角色，再一次证明玩游戏要带妹。</p>
+
+<p>回归到这个游戏的本质，那就是生存游戏，没什么比活下来更重要的了。</p>
+
+<h2 id="toc_24">结尾</h2>
+
+<p>这次爬虫主要是利用了微信游戏频道可以查看陌生人数据的场景才能提取到这么多数据。我们可以通过同样的手段来分析王者荣耀和其它游戏的数据，有兴趣的同学可以尝试一下。</p>
+
+<p>最后再说一下，UMP9是把好枪，配2倍镜非常爽。</p>
+
+
+		</div>
+	
+
+ 
+	
+
+  
+  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+  </body>
+</html>
