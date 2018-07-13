@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[编程之路]]></title>
-  <link href="www.codingroad.com/atom.xml" rel="self"/>
-  <link href="www.codingroad.com/"/>
-  <updated>2018-07-13T13:14:45+08:00</updated>
-  <id>www.codingroad.com/</id>
+  <link href="blog.codingroad.com/atom.xml" rel="self"/>
+  <link href="blog.codingroad.com/"/>
+  <updated>2018-07-13T13:53:01+08:00</updated>
+  <id>blog.codingroad.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[用python分析了20万场吃鸡数据]]></title>
-    <link href="www.codingroad.com/python-get-and-analysis-pubg-mobile-data.html.html"/>
+    <link href="blog.codingroad.com/python-get-and-analysis-pubg-mobile-data.html.html"/>
     <updated>2018-07-08T23:21:30+08:00</updated>
-    <id>www.codingroad.com/python-get-and-analysis-pubg-mobile-data.html.html</id>
+    <id>blog.codingroad.com/python-get-and-analysis-pubg-mobile-data.html.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>
@@ -897,9 +897,9 @@ if __name__ == &#39;__main__&#39;:
   
   <entry>
     <title type="html"><![CDATA[关于12' MacBook使用的记录]]></title>
-    <link href="www.codingroad.com/macbook12.html"/>
+    <link href="blog.codingroad.com/macbook12.html"/>
     <updated>2018-04-24T15:03:46+08:00</updated>
-    <id>www.codingroad.com/macbook12.html</id>
+    <id>blog.codingroad.com/macbook12.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>
