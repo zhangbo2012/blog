@@ -4,7 +4,7 @@
   <title><![CDATA[编程之路]]></title>
   <link href="blog.codingroad.com/atom.xml" rel="self"/>
   <link href="blog.codingroad.com/"/>
-  <updated>2018-07-13T15:36:26+08:00</updated>
+  <updated>2018-07-13T15:39:52+08:00</updated>
   <id>blog.codingroad.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -22,6 +22,8 @@
 <p>本周项目，冯总给介绍了一个活，需要用到串口和GUI，这两个方面我从未尝试过，准备折腾一把。</p>
 
 <p>主要用 <code>tkinter</code> 和 <code>serial</code> 两个模块</p>
+
+<h1 id="toc_0"></h1>
 
 ]]></content>
   </entry>
