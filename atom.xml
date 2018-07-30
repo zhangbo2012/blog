@@ -4,7 +4,7 @@
   <title><![CDATA[编程之路]]></title>
   <link href="blog.codingroad.com/atom.xml" rel="self"/>
   <link href="blog.codingroad.com/"/>
-  <updated>2018-07-13T15:39:52+08:00</updated>
+  <updated>2018-07-30T11:36:43+08:00</updated>
   <id>blog.codingroad.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -1126,6 +1126,1422 @@ if __name__ == &#39;__main__&#39;:
 <p>在做 <a href="http://python.jobbole.com/89209/">用 Python 分析了 20 万场吃鸡数据</a> 分析时，就使用Charles抓取了手机的流量进行接口分析。</p>
 
 <p><img src="media/15310632907202/15310659449947.jpg" alt=""/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL中文乱码]]></title>
+    <link href="blog.codingroad.com/python-mysql-charset.html"/>
+    <updated>2017-01-15T19:19:37+08:00</updated>
+    <id>blog.codingroad.com/python-mysql-charset.html</id>
+    <content type="html"><![CDATA[
+<p>在连接时加上utf-8即可解决</p>
+
+<pre><code class="language-python">
+    def connect(self):
+        if self.connected:
+            return True
+
+        try:
+            self.logger.info(&quot;Get MySQL Connection, DB=%s&quot; % self.dbname)
+            self._mysql = MySQLdb.connect(self.ip,
+                                          self.username,
+                                          self.password,
+                                          self.db,
+                                          port=self.port,
+                                          local_infile=1,
+                                          charset=&#39;utf8&#39;)
+            self.connected = True
+            self.logger.info(&quot;Get MySQL Connection Success, DB=%s&quot; % self.dbname)
+            return True
+        except Exception as e:
+            self.logger.error(&quot;Get MySQL Connection Failed, DB=%s, Error=%s&quot; % (self.dbname, e.__str__()))
+            return False
+</code></pre>
+
+<pre><code class="language-html">&lt;div class=&quot;ds-thread&quot; &gt;&lt;/div&gt;
+&lt;!-- 多说评论框 end --&gt;
+&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var duoshuoQuery = {short_name:&quot;codingroad&quot;};
+    (function() {
+        var ds = document.createElement(&#39;script&#39;);
+        ds.type = &#39;text/javascript&#39;;ds.async = true;
+        ds.src = (document.location.protocol == &#39;https:&#39; ? &#39;https:&#39; : &#39;http:&#39;) + &#39;//static.duoshuo.com/embed.js&#39;;
+        ds.charset = &#39;UTF-8&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] 
+         || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(ds);
+    })();
+    &lt;/script&gt;
+&lt;!-- 多说公共JS代码 end --&gt;
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTPS]]></title>
+    <link href="blog.codingroad.com/om-ssl-config.html"/>
+    <updated>2017-02-06T09:06:41+08:00</updated>
+    <id>blog.codingroad.com/om-ssl-config.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">配置自签发证书</h2>
+
+<ol>
+<li><p>运行如下命令，生成keystore文件</p>
+
+<pre><code> keytool -genkey -alias tomcat -keyalg RSA
+</code></pre>
+
+<p>这样就可以在用户家目录下生成一个.keystore文件。在生成过程中需要设置一些必要的信息，其中密码信息一定要记住。</p></li>
+<li><p>修改server.xml，配置证书。</p>
+
+<p>找到如下配置部分</p>
+
+<pre><code class="language-xml"> &lt;!--
+&lt;Connector port=&quot;8443&quot; protocol=&quot;HTTP/1.1&quot; SSLEnabled=&quot;true&quot;
+    maxThreads=&quot;150&quot; scheme=&quot;https&quot; secure=&quot;true&quot;
+    clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;
+--&gt;
+</code></pre>
+
+<p>取消注释，修改成如下内容</p>
+
+<pre><code class="language-xml"> &lt;Connector SSLEnabled=&quot;true&quot; 
+            acceptCount=&quot;100&quot; 
+            clientAuth=&quot;false&quot;
+            disableUploadTimeout=&quot;true&quot;         
+            enableLookups=&quot;false&quot;
+            maxThreads=&quot;25&quot;
+            port=&quot;8443&quot; 
+            keystoreFile=&quot;~/.keystore&quot;
+            keystorePass=&quot;password&quot;
+            protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; 
+            scheme=&quot;https&quot;
+            secure=&quot;true&quot; 
+            sslProtocol=&quot;TLS&quot; 
+ /&gt;
+</code></pre>
+
+<blockquote>
+<p>注： password请设置成上一步输入的密码</p>
+</blockquote></li>
+<li><p>重启apache-tomcat，访问 <code>https://localhost:8443</code> 查看效果。</p></li>
+</ol>
+
+<h2 id="toc_1">根据url配置https</h2>
+
+<p>编辑web.xml文件</p>
+
+<ol>
+<li><p>设置所有路径都走https</p>
+
+<pre><code class="language-xml">    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;HTTPSOnly&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;user-data-constraint&gt;
+            &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+        &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+</code></pre></li>
+<li><p>设置部分路径走https</p>
+
+<pre><code class="language-xml">    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;HTTPSOnly&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;/api/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;user-data-constraint&gt;
+            &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;
+        &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+    &lt;security-constraint&gt;
+        &lt;web-resource-collection&gt;
+            &lt;web-resource-name&gt;HTTPSOrHTTP&lt;/web-resource-name&gt;
+            &lt;url-pattern&gt;*.ico&lt;/url-pattern&gt;
+            &lt;url-pattern&gt;/img/*&lt;/url-pattern&gt;
+            &lt;url-pattern&gt;/css/*&lt;/url-pattern&gt;
+        &lt;/web-resource-collection&gt;
+        &lt;user-data-constraint&gt;
+            &lt;transport-guarantee&gt;NONE&lt;/transport-guarantee&gt;
+        &lt;/user-data-constraint&gt;
+    &lt;/security-constraint&gt;
+
+</code></pre></li>
+</ol>
+
+<h2 id="toc_2">生成cer证书文件</h2>
+
+<ol>
+<li><p>查看keystore信息</p>
+
+<pre><code class="language-shell"> april@client:~$ keytool -list -v -keystore .keystore -storepass 123456
+Keystore type: JKS
+Keystore provider: SUN
+Your keystore contains 1 entry
+Alias name: tomcat
+Creation date: Jan 16, 2017
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: CN=Z, OU=4YT, O=Unknown, L=hz, ST=zj, C=CN
+Issuer: CN=Z, OU=4YT, O=Unknown, L=hz, ST=zj, C=CN
+Serial number: 1822278c
+Valid from: Mon Jan 16 16:44:46 CST 2017 until: Sun Apr 16 16:44:46 CST 2017
+Certificate fingerprints:
+         MD5:  14:6B:D9:2B:90:D7:AA:E7:5A:CC:8E:9A:A1:FD:0E:7B
+</code></pre>
+
+<p>可以看到我们需要导出的证书alias=tomcat</p></li>
+<li><p>生成cer文件</p>
+
+<pre><code class="language-shell">april@client:~$   keytool -export -alias tomcat -keystore .keystore -storepass 123456 -rfc -file client.cer
+Certificate stored in file &lt;client.cer&gt;
+</code></pre>
+
+<p>这样我们就生成了一个cer文件，可以内置到app中，实现app开启https访问。</p></li>
+</ol>
+
+<h1 id="toc_3"></h1>
+
+<p><a href="https://www.oschina.net/question/12_23148">参考链接：5分钟内搞定Tomcat的SSL配置</a><br/>
+<a href="http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html">参考链接：SSL/TLS Configuration HOW-TO</a><br/>
+<a href="https://www.mulesoft.com/tcat/tomcat-ssl">参考链接：A Simple Step-By-Step Guide To Apache Tomcat SSL Configuration</a><br/>
+<a href="http://www.itworld.com/article/2769041/development/how-to-configure-tomcat-to-always-require-https.html">参考链接：How to configure Tomcat to always require HTTPS</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[OSS]]></title>
+    <link href="blog.codingroad.com/om-aliyun-use-oss-as-nas.html"/>
+    <updated>2017-02-06T22:52:50+08:00</updated>
+    <id>blog.codingroad.com/om-aliyun-use-oss-as-nas.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">通过oss实现共享存储</a>
+<ul>
+<li>
+<a href="#toc_1">需求</a>
+</li>
+<li>
+<a href="#toc_2">安装</a>
+</li>
+<li>
+<a href="#toc_3">配置</a>
+</li>
+<li>
+<a href="#toc_4">取消映射</a>
+</li>
+<li>
+<a href="#toc_5">参考链接</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_6">数据异地灾备</a>
+<ul>
+<li>
+<a href="#toc_7">需求</a>
+</li>
+<li>
+<a href="#toc_8">参考链接</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<hr/>
+
+<h2 id="toc_0">通过oss实现共享存储</h2>
+
+<h3 id="toc_1">需求</h3>
+
+<p>接入层的www门户、H5门户和APP门户都需要使用到同一份内容文件，这些文件的业务特点是：</p>
+
+<ul>
+<li>不会出现并发写，如用户头像，一般情况下只会出现单个请求来修改</li>
+<li>读的次数远大于写的次数。</li>
+<li>读取和写入时有明确的文件名和路径，不会用取文件列表的操作和find操作。</li>
+</ul>
+
+<p>由于该需求出现的时候，还没有NAS服务，经过研究发现可以使用阿里开源项目ossfs将oss挂载成本地目录，以实现这个需求，具体操作如下：</p>
+
+<h3 id="toc_2">安装</h3>
+
+<pre><code class="language-shell">root@iZ2590mt68kZ:~# apt-get install gdebi-core
+root@iZ2590mt68kZ:~# wget https://github.com/aliyun/ossfs/releases/download/v1.79.9/ossfs_1.79.9_ubuntu14.04_amd64.deb
+root@iZ2590mt68kZ:~# gdebi ossfs_1.79.9_ubuntu14.04_amd64.deb
+</code></pre>
+
+<h3 id="toc_3">配置</h3>
+
+<pre><code class="language-shell">h5@iZ2590mt68kZ:~$ echo &quot;sharedata:KradSx13tE012346:h0FgmWo775ksae8n171opZg2512345&quot; &gt; ~/.passwd-ossfs
+h5@iZ2590mt68kZ:~$ chmod 640 ~/.passwd-ossfs
+```ca
+
+说明：
+
+    
+| 值 | 说明 |
+| --- | --- |
+| sharedata | BucketName |
+| KradSx13tE012346 | Access Key ID |
+| h0FgmWo775ksae8n171opZg2512345 | Access Key Secret |
+
+### 映射本地目录
+
+```shell
+h5@iZ2590mt68kZ:~$ mkdir /home/april/sharedata
+h5@iZ2590mt68kZ:~$ ossfs sharedata /home/april/sharedata -ourl=http://oss-cn-beijing-internal.aliyuncs.com
+</code></pre>
+
+<p>这样就Bucket名为sharedata的oss存储映射到本地/home/april/sharedata目录了。</p>
+
+<blockquote>
+<p>注：ourl为你的oss所在域的域名，在控制台中可以看到，将bucketname去掉就可以了<br/>
+由于我的ECS和oss是在同一个区，为了节约流量钱，我就直接用内网域名。</p>
+</blockquote>
+
+<h3 id="toc_4">取消映射</h3>
+
+<pre><code class="language-shell">h5@iZ2590mt68kZ:~$ fusermount -u /home/april/sharedata
+</code></pre>
+
+<h3 id="toc_5">参考链接</h3>
+
+<ul>
+<li><a href="https://github.com/aliyun/ossfs">ossfs项目首页</a></li>
+</ul>
+
+<h2 id="toc_6">数据异地灾备</h2>
+
+<h3 id="toc_7">需求</h3>
+
+<p>我们将帖子的内容文件存在oss上，由于oss的特性，取指定文件非常快，但是遍历文件就会非常慢，所以在ECS上进行文件备份是一个大难题。</p>
+
+<p>经过研究发现阿里云本身提供oss跨域备份的功能，可以很轻松的实现这个需求。</p>
+
+<p><img src="media/14863927703729/14864321364035.jpg" alt=""/></p>
+
+<h3 id="toc_8">参考链接</h3>
+
+<ul>
+<li><a href="https://help.aliyun.com/document_detail/31864.html">oss管理跨区域复制</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python xml操作]]></title>
+    <link href="blog.codingroad.com/python-xml.html"/>
+    <updated>2017-02-15T13:51:29+08:00</updated>
+    <id>blog.codingroad.com/python-xml.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">生成xml数据</a>
+</li>
+<li>
+<a href="#toc_1">增加文本节点</a>
+</li>
+</ul>
+
+
+<hr/>
+
+<h2 id="toc_0">生成xml数据</h2>
+
+<pre><code class="language-python">from xml.dom.minidom import Document
+doc = Document()
+chapterinfo = doc.createElement(&#39;chapterinfo&#39;)
+doc.appendChild(chapterinfo)
+
+bookid = doc.createElement(&#39;bookid&#39;)
+title_text = doc.createCDATASection(&#39;12333&#39;)
+
+bookid.appendChild(title_text)
+chapterinfo.appendChild(bookid)
+    
+print doc.toxml(&#39;utf-8&#39;)
+</code></pre>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;chapterinfo&gt;
+    &lt;bookid&gt;
+        &lt;![CDATA[12333]]&gt;
+    &lt;/bookid&gt;
+&lt;/chapterinfo&gt;
+</code></pre>
+
+<h2 id="toc_1">增加文本节点</h2>
+
+<pre><code class="language-python"># coding=utf-8
+from xml.dom.minidom import Document
+
+# 增加Cdata节点
+def appendCdataNode(xmlobj, title, text):
+    doc = Document()
+    tmp = doc.createElement(title)
+    text = str2unicode(text)
+    tmp_txt = doc.createCDATASection(text)
+    tmp.appendChild(tmp_txt)
+    xmlobj.appendChild(tmp)
+
+# 增加普通text节点
+def appendTextNode(xmlobj, title, text):
+    doc = Document()
+    tmp = doc.createElement(title)
+    if not isinstance(text, str):
+        try:
+            text = str(text)
+        except Exception as e:
+            print e
+            return
+    text = str2unicode(text)
+    tmp_txt = doc.createTextNode(text)
+    tmp.appendChild(tmp_txt)
+    xmlobj.appendChild(tmp)
+
+# str转成unicode，避免在组装xml对象时出错
+def str2unicode(text):
+    if type(text) == str:
+        return text.decode(&#39;utf-8&#39;)
+    elif type(text) == unicode:
+        return text
+    else:
+        print &quot;str2unicode failed, text type is not str or unicode, type=%s&quot; % type(text)
+        return None
+
+# 测试代码
+if __name__ == &#39;__main__&#39;:
+    doc = Document()
+    book = doc.createElement(&#39;book&#39;)
+    appendTextNode(book, &quot;bookname&quot;, &quot;热&quot;)
+    appendTextNode(book, &quot;viewcount&quot;, 10003)
+    appendCdataNode(book, &quot;description&quot;, &quot;这不是一本黄书&quot;)
+    doc.appendChild(book)
+    
+    print doc.toprettyxml()
+
+</code></pre>
+
+<p>结果</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;book&gt;
+    &lt;bookname&gt;热&lt;/bookname&gt;
+    &lt;viewcount&gt;10003&lt;/viewcount&gt;
+    &lt;description&gt;&lt;![CDATA[这不是一本黄书]]&gt;&lt;/description&gt;
+&lt;/book&gt;
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python ip操作]]></title>
+    <link href="blog.codingroad.com/python-ip.html"/>
+    <updated>2017-02-15T13:55:19+08:00</updated>
+    <id>blog.codingroad.com/python-ip.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">根据ip段取所有ip</a>
+</li>
+<li>
+<a href="#toc_1">计算ip是否在指定的段中</a>
+</li>
+<li>
+<a href="#toc_2">django校验来源ip是否在配置的白名单中</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">根据ip段取所有ip</h2>
+
+<pre><code class="language-python">from IPy import IP
+ip = IP(&#39;192.168.0.0/24&#39;)
+print ip.len()
+
+for i in ip:
+   print i
+</code></pre>
+
+<h2 id="toc_1">计算ip是否在指定的段中</h2>
+
+<pre><code class="language-python">from IPy import IP
+ip = IP(&#39;192.168.0.0/24&#39;)
+print IP(&#39;192.168.0.132&#39;) in ip
+</code></pre>
+
+<h2 id="toc_2">django校验来源ip是否在配置的白名单中</h2>
+
+<pre><code class="language-python">
+iplist = &quot;&quot;&quot;192.168.1.0/24
+192.168.1.64/26
+10.0.1.0/25
+127.0.0.1&quot;&quot;&quot;
+
+# 加载ip列表，本算法是应对配置的ip量较大的情况
+# 将ip的A\B\C段做为key，ip做为value，生成一个dict，提升校验速度
+# {
+#   &#39;192.168.1&#39;: [IP(&#39;192.168.1.2&#39;), 
+#                 IP(&#39;192.168.1.3&#39;), 
+#                 IP(&#39;192.168.1.4&#39;)]
+#   &#39;127.0.0&#39;: [IP(&#39;127.0.0.1&#39;)]
+# }
+def loadip():
+    res = {}
+    for ipstring in iplist.split(&quot;\n&quot;):
+        # 提取ip的ABC段
+        key = &#39;.&#39;.join(ipstring.split(&#39;.&#39;)[:3])
+        if key not in res:
+            res[key] = []
+
+        ips = IP(ipstring)
+        for ip in ips:
+            # print ip
+            res[key].append(ip)
+
+    return res
+
+# 校验request是否是合法来源
+def _check_request(request):
+    ipwhitelist = loadip()
+    remoteip = request.META[&#39;REMOTE_ADDR&#39;]
+    key = &#39;.&#39;.join(remoteip.split(&quot;.&quot;)[:3])
+    remoteip = IP(remoteip)
+
+    if key not in ipwhitelist:
+        return False
+
+    if remoteip not in ipwhitelist[key]:
+        return False
+    return True
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python 在__init__中批量设置类属性]]></title>
+    <link href="blog.codingroad.com/python-set-class-attr-in-init.html"/>
+    <updated>2017-02-16T08:45:41+08:00</updated>
+    <id>blog.codingroad.com/python-set-class-attr-in-init.html</id>
+    <content type="html"><![CDATA[
+<p>常见的写法：</p>
+
+<pre><code class="language-python">def __init__(self, x, y, z):
+    ...
+    self.x = x
+    self.y = y
+    self.z = z
+    ...
+</code></pre>
+
+<p>可以简写成如下：</p>
+
+<pre><code class="language-python">class A:
+    def __init__(self, **kwargs):
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python 项目开发技巧 - 配置与代码分离]]></title>
+    <link href="blog.codingroad.com/python-config-in-different-env.html"/>
+    <updated>2017-03-20T22:18:51+08:00</updated>
+    <id>blog.codingroad.com/python-config-in-different-env.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">问题</a>
+</li>
+<li>
+<a href="#toc_1">解决方案</a>
+</li>
+<li>
+<a href="#toc_2">示例</a>
+</li>
+</ul>
+
+
+<hr/>
+
+<h2 id="toc_0">问题</h2>
+
+<p>写项目代码的时候，在配置上容易碰到下面三个问题：</p>
+
+<ol>
+<li>多个环境之间存在多套配置，发布时需要单独处理配置信息。</li>
+<li>配置中存在敏感信息，如数据库连接串，开源代码时需要修改配置。</li>
+<li>同一台主机上运行多个项目，但都使用到同一个配置，一但发生变更，需要修改多个项目的代码。</li>
+</ol>
+
+<h2 id="toc_1">解决方案</h2>
+
+<p>针对以上两个问题，在《Flask Web开发》 <code>Miguel Grinberg</code>中找到的解决方案：</p>
+
+<pre><code>  使用环境变量来存储关键配置，或者主机相关环境配置信息
+</code></pre>
+
+<h2 id="toc_2">示例</h2>
+
+<p>如，针对问题1，我们可以按如下步骤解决：</p>
+
+<ol>
+<li><p>在开发主机上设置环境变量</p>
+
+<pre><code class="language-shell">QindeMacBook-Pro-2:~ echo &#39;export PYTHON_ENV=&quot;dev&quot;&#39; &gt;&gt; ~/.bash_profile
+QindeMacBook-Pro-2:~ source ~/.bash_profile
+</code></pre>
+
+<blockquote>
+<p>这是在Mac上的操作，其它linux系统操作方式类似，可能文件名不太一样，Google一下就可以找到，在此不赘述。</p>
+</blockquote></li>
+<li><p>在生产主机上设置环境变量</p>
+
+<pre><code class="language-shell">cm@iZbp13ifgrbntjy6yxbha4Z:~$  echo &#39;export PYTHON_ENV=&quot;prd&quot;&#39; &gt;&gt; ~/profile
+cm@iZbp13ifgrbntjy6yxbha4Z:~$ source .profile
+</code></pre>
+
+<blockquote>
+<p>这是在ubuntu上的操作方法，做参考。</p>
+</blockquote></li>
+<li><p>配置代码</p>
+
+<pre><code class="language-python">import os
+env = os.environ.get(&#39;PYTHON_ENV&#39;)
+
+if env == &#39;dev&#39;:
+   book_file_folder = &quot;/Users/qin/Documents/tmp/book/&quot;
+else:
+   book_file_folder = &quot;/home/cm/book/&quot;
+</code></pre>
+
+<p>这样，在开发的过程中就可以梳理线上的配置，通过环境变量来做开关，发布后不需要修改代码就可以让程序指向生产环境的配置。相同的办法可以用在避免代码中出现敏感配置的场景。</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[django 通过thread实现异步任务]]></title>
+    <link href="blog.codingroad.com/python-django-asyn-task.html"/>
+    <updated>2017-03-29T21:54:14+08:00</updated>
+    <id>blog.codingroad.com/python-django-asyn-task.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">业务场景</h2>
+
+<p>业务人员说合作方拿来了几本书的txt文件，需要导入平台，而且以后会是常态化的工作，需要开发功能来实现。</p>
+
+<h2 id="toc_1">分析</h2>
+
+<p>txt文档中包含大量章节的内容，导入时由于章节比较多，整个过程时间不可控，如果让浏览器同步等待响应结果，很可能会出现响应超时的情况。</p>
+
+<p>所以我们需要通过异步处理的方式来实现，简单看了一下，通过Thread就可以实现这个需求，大致流程如下：</p>
+
+<pre><code class="language-sequence">浏览器-&gt;服务端: create import task
+Note right of 服务端: 检查参数
+Note right of 服务端: 在task表中创建任务记录
+Note right of 服务端: 启动异步线程
+服务端--&gt;浏览器: taskid
+Note right of 服务端: 异步线程处理task
+浏览器-&gt;服务端: get task status
+服务端--&gt;浏览器: task status
+</code></pre>
+
+<h2 id="toc_2">Demo代码</h2>
+
+<pre><code class="language-python">from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+import threading
+import datetime
+
+# 执行具体任务的异步线程
+class TaskThread(threading.Thread):
+    def run(self):
+        import time
+
+        for i in range(20):
+            time.sleep(1)
+            print datetime.datetime.now().strftime(&#39;%Y-%m-%d %H:%M:%S&#39;),&quot;%s&quot; % (self.getName(),)
+
+
+def CreateTask(request):
+    taskThread = TaskThread()
+    taskThread.start()
+    # testThread.join() # 如果加上就会等线程执行完才响应，在我们这个场景下不加
+    return HttpResponse(datetime.datetime.now().strftime(&#39;%Y-%m-%d %H:%M:%S&#39;))
+</code></pre>
+
+<p>在上述demo中，访问CreateTask时，浏览器会迅速得到内容为当前时间的反馈，但是后台还会持续执行异步线程，每秒打印一次时间信息，持续20次。</p>
+
+<h2 id="toc_3">实现效果</h2>
+
+<p><img src="media/14907956549591/14908834885507.gif" alt=""/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python-发送邮件]]></title>
+    <link href="blog.codingroad.com/python-send-email.html"/>
+    <updated>2017-04-06T21:33:37+08:00</updated>
+    <id>blog.codingroad.com/python-send-email.html</id>
+    <content type="html"><![CDATA[
+<pre><code>#coding:utf-8
+__author__ = &#39;zhangbo&#39;
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+# reciver: 收件人的邮箱，为列表，支持多个收件人 
+# title: 邮件标题
+# html: 发送的html代码
+def send_html_email(reciver, title, html):
+    # 发件人的邮箱
+    me = &quot;sender@mailserver.com&quot;
+    msg = MIMEMultipart(&#39;alternative&#39;)
+    msg[&#39;Subject&#39;] = title
+    msg[&#39;From&#39;] = me
+    msg[&#39;To&#39;] = &#39;,&#39;.join(reciver)
+
+    part2 = MIMEText(html, &#39;html&#39;, &#39;utf-8&#39;)
+    msg.attach(part2)
+
+    try:
+        s = smtplib.SMTP()
+        # 发件服务器
+        s.connect(&quot;smtp.mailserver.com&quot;, 25)
+        # 登陆发件人的账号和密码
+        s.login(me, &#39;password&#39;)
+        s.sendmail(me, reciver, msg.as_string())
+        s.quit()
+        return True
+    except Exception as e:
+        print e
+        return False
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[nginx + uwsgi 部署bottle]]></title>
+    <link href="blog.codingroad.com/use-nginx-deploy-bottle-project.html"/>
+    <updated>2017-04-11T13:46:12+08:00</updated>
+    <id>blog.codingroad.com/use-nginx-deploy-bottle-project.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">安装</h2>
+
+<pre><code>apt-get install  uwsgi uwsgi-plugin-python nginx
+</code></pre>
+
+<h2 id="toc_1">配置</h2>
+
+<h3 id="toc_2">uwsgi</h3>
+
+<p>配置文件在 <code>/etc/uwsgi/apps-available/bottle.ini</code></p>
+
+<pre><code>[uwsgi]
+socket = /run/uwsgi/app/bottle/socket
+chdir = /var/www/bottle
+master = true
+plugins = python
+file = app.py
+uid = www-data
+gid = www-data
+</code></pre>
+
+<pre><code>ln -s /etc/uwsgi/apps-available/bottle.ini /etc/uwsgi/apps-enabled/bottle.ini
+</code></pre>
+
+<h3 id="toc_3">nginx</h3>
+
+<p>配置文件在 <code>/etc/nginx/conf.d/bottle.conf</code></p>
+
+<pre><code>upstream _bottle {
+    server unix:/run/uwsgi/app/bottle/socket;
+}
+
+server {
+    listen [::]:80;
+    listen 80;
+    server_name deb.ngx.cc;
+    root /var/www/bottle;
+
+    location / {
+        try_files $uri @uwsgi;
+    }
+
+    location @uwsgi {
+        include uwsgi_params;
+        uwsgi_pass _bottle;
+    }
+}
+</code></pre>
+
+<h2 id="toc_4">启动</h2>
+
+<pre><code>service uwsgi restart
+service nginx restart
+</code></pre>
+
+<h2 id="toc_5">问题处理</h2>
+
+<h3 id="toc_6">启动失败</h3>
+
+<p>查看uwsgi和nginx的日志，查找原因</p>
+
+<ul>
+<li>uwsgi日志: /var/logs/uwsgi/app/</li>
+<li>nginx日志: /var/logs/nginx/error.log</li>
+</ul>
+
+<h3 id="toc_7">nginx报连接upstream时权限不足</h3>
+
+<p>主要原因是nginx是需要运行在web-data用户和组下，对应的uwsgi的socket文件也需要是该用户权限。</p>
+
+<h3 id="toc_8">bottle运行时print中文时报错</h3>
+
+<p>主要原因是编码问题，暂未跟进处理 </p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[python使用MySQLdb时报'MySQL server has gone away']]></title>
+    <link href="blog.codingroad.com/python-mysql-has-gone-away.html"/>
+    <updated>2017-04-12T08:18:16+08:00</updated>
+    <id>blog.codingroad.com/python-mysql-has-gone-away.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">1、现象</a>
+</li>
+<li>
+<a href="#toc_1">2、原因</a>
+</li>
+<li>
+<a href="#toc_2">3、解决方案</a>
+</li>
+<li>
+<a href="#toc_3">4、效果</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">1、现象</h2>
+
+<p>在bottle项目中，自己使用mysqldb连接数据库来执行SQL，在程序启动的时候会初始化数据连接，然后全局共享这个连接。</p>
+
+<p>但是在程序运行一段时间后就会出现执行SQL失败的情况，重启后即可恢复。</p>
+
+<p>对应的错误日志如下：</p>
+
+<pre><code>2017-04-09 13:45:25,624|ERROR|MySQL.py|Line:67|Run Select Failed, SQL=
+ select userid, companyid, role, status from dw_admin_user where username = &#39;guash&#39; and password = &#39;6F0E9B51C72BA95911638B3971F&#39;  
+, ResKeys=[&#39;userid&#39;, &#39;companyid&#39;, &#39;role&#39;, &#39;status&#39;], Error=(2006, &#39;MySQL server has gone away&#39;)
+</code></pre>
+
+<h2 id="toc_1">2、原因</h2>
+
+<p>这个项目在晚间没有人访问，长时间没有执行SQL，导致MySQL服务端将连接中断，再次执行SQL时就会出现此错误。</p>
+
+<h2 id="toc_2">3、解决方案</h2>
+
+<p>在执行SQL的动作前加一个ping操作，判断连接是否存在，如果不存在则自动重新连接。</p>
+
+<pre><code class="language-python">
+    def run_select(self, sql, reskeys):
+        if not self.connected:
+            res = self.connect()
+            if not res:
+                return None
+
+        try:
+            # ping操作，判断连接是否存在，不存在则自动重新连接
+            self._mysql.ping(True)
+            
+            cursor = self._mysql.cursor()
+            self.logger.info(&quot;run select: SQL=\n%s \n, ResKeys=%s, db=%s&quot; % (sql, str(reskeys), self.dbname))
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            self.logger.error(&quot;Run Select Failed, SQL=\n%s \n, ResKeys=%s, Error=%s&quot; % (sql, str(reskeys), e.__str__()))
+            return None
+</code></pre>
+
+<h2 id="toc_3">4、效果</h2>
+
+<p>运行两天未出现之前问题，继续观察。<br/>
+抽空可以研究一下django的源码，因为在django项目中从未出现此类问题。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[域名解析情况监控]]></title>
+    <link href="blog.codingroad.com/monitor-dns-resove.html"/>
+    <updated>2017-04-21T11:15:15+08:00</updated>
+    <id>blog.codingroad.com/monitor-dns-resove.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">新增信息收集脚本</h2>
+
+<p>/root/script/dns/checkdns.sh</p>
+
+<pre><code class="language-sh">LOG_FOLDER=/root/script/dns/logs/
+LOG_FILE=${LOG_FOLDER}`date &quot;+%Y-%m-%d&quot;`.txt
+DOMAIN=www.4yt.cn
+
+echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOMAIN}  | grep -v &#39;;&#39;`;  `ping ${DOMAIN} -c 1 -n | head -2 | grep -v &#39;PING&#39; `&quot;  &gt;&gt;  ${LOG_FILE}
+</code></pre>
+
+<h2 id="toc_1">增加crontab，每分钟收集一次</h2>
+
+<pre><code class="language-sh">*/1 * * * * sh /root/script/dns/checkdns.sh
+</code></pre>
+
+<h2 id="toc_2">结果日志</h2>
+
+<pre><code class="language-sh">root@iZ231r70b7pZ:~/script/dns# more logs/2017-04-21.txt 
+
+2017-04-21 10:59:01;   www.4yt.cn.              3600    IN      A       59.110.19.86;  64 bytes from 59.110.19.86: icmp_seq=1 ttl=58 time=33.9 ms
+2017-04-21 11:00:01;   www.4yt.cn.              3420    IN      A       59.110.19.86;  64 bytes from 59.110.19.86: icmp_seq=1 ttl=58 time=33.7 ms
+2017-04-21 11:01:01;   www.4yt.cn.              218     IN      A       59.110.19.86;  64 bytes from 59.110.19.86: icmp_seq=1 ttl=58 time=33.7 ms
+2017-04-21 11:02:01;   www.4yt.cn.              408     IN      A       59.110.19.86;  64 bytes from 59.110.19.86: icmp_seq=1 ttl=58 time=33.6 ms
+2017-04-21 11:03:01;   www.4yt.cn.              348     IN      A       59.110.19.86;  64 bytes from 59.110.19.86: icmp_seq=1 ttl=58 time=33.6 ms
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[浙江移动劫持404、500等响应码问题处理]]></title>
+    <link href="blog.codingroad.com/zhejiang-cmcc-http-status-hijacking.html"/>
+    <updated>2017-05-11T16:05:49+08:00</updated>
+    <id>blog.codingroad.com/zhejiang-cmcc-http-status-hijacking.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">问题现象</h2>
+
+<p>问题发现：网站改版升级后，原URL会失效，所以我们在tomcat中将404错误指向error.jsp页面，此页面加载后发起重定向到新的首页。</p>
+
+<p>在wifi环境下测试正常，使用错误URL访问能正常跳转。但是在移动4G网络下发现无法进行正常跳转，而是进入下述图片中的页面。</p>
+
+<p><img src="media/14944899493728/14944901728602.jpg" alt=""/></p>
+
+<h2 id="toc_1">问题分析</h2>
+
+<p>这是第一次遇到这种问题，经过网上查资料，学到了 <code>响应码劫持</code> 这个新词汇。意思是攻击者在发现response头中的status为404、500等异常时，将响应的数据进行修改的劫持手段。</p>
+
+<p>在这个场景中，浙江移动就是为了推广自己的产品，而将404错误劫持到其定义的页面上。忽视了网站本身对404错误响应的body中还会有逻辑处理的场景，导致网站访问出现异常。</p>
+
+<p>对于这种行为，我只想说 <strong>呵呵</strong>！</p>
+
+<h2 id="toc_2">问题解决</h2>
+
+<p>通过上述分析，确定问题原因是在响应码上，那么应对起来就简单多了。我们只需要将响应码强制修改成200就好了。在error.jsp中我们通过如下代码强制修改响应码：</p>
+
+<pre><code class="language-jsp">&lt;%
+  response.setStatus(200);
+%&gt; 
+</code></pre>
+
+<blockquote>
+<p>注：我们第一次修改并没有成功，后面将代码加在<code>&lt;/body&gt;</code>前面就可以了，原因未知。</p>
+</blockquote>
+
+<h2 id="toc_3">其它分析</h2>
+
+<p>后面我做了https的404错误测试，发现浙江移动就不会进行劫持，所以还是应该尽量使用https。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[微信的坑-微信服务器重发页面请求的问题]]></title>
+    <link href="blog.codingroad.com/wechat-multiple-requst.html"/>
+    <updated>2017-05-17T17:31:37+08:00</updated>
+    <id>blog.codingroad.com/wechat-multiple-requst.html</id>
+    <content type="html"><![CDATA[
+<p>这是一个大坑，可能有人还没有注意到这个问题，但它确实存在，而且可能会影响你的统计数据。</p>
+
+<h2 id="toc_0">现象</h2>
+
+<p>近期我们在微信上做推广后，做数据分析时发现一些异常数据：</p>
+
+<ul>
+<li>大量用户来自天津、上海的ip</li>
+<li>这些用户每次只访问一个页面，产生session之后就再也不来了</li>
+</ul>
+
+<p>最初我们认为是下游推广渠道在坑我们钱，用天津和上海的服务器来刷访问用户数，近而骗取我们的推广费用。</p>
+
+<p>然而和多家合作方推广后都发现同样的问题，所以觉得这个事情并有这么简单。经过一系列的排查之后才发现，这个大坑居然是微信造成的。</p>
+
+<h2 id="toc_1">问题定位</h2>
+
+<p>为了确认这些“用户”是真用户，还是假用户，我们尝试了大量手段来分析，此处省略5000字，Fuck！</p>
+
+<p>最终我们联想到了UC浏览器预读功能，开始怀疑是某个地方的预读导致，于是按这个思路来进行定位。</p>
+
+<blockquote>
+<p>关于UC浏览器的预读功能：开启此功能后，在读小说时，浏览器会分析页面中的“下一章”链接，并后台提前请求服务端拿到响应数据，等用户点下一章的时候，页面就可以瞬间展示出来。</p>
+</blockquote>
+
+<h3 id="toc_2">定位思路：</h3>
+
+<ul>
+<li>组装一个没有人会访问的URL</li>
+<li>通过微信浏览器访问该URL</li>
+<li>监控服务端日志，确认是否会有其它人发起同样的请求，如果有，那就说明微信或者中间的网络服务商有人在预读。</li>
+</ul>
+
+<h3 id="toc_3">定位过程</h3>
+
+<ol>
+<li><p>组装一个没有人会访问的URL</p>
+
+<ul>
+<li>正常的URL：/bookinfo/148161271068074.html</li>
+<li>组装的URL：/bookinfo/148161271068074.html?c=fuckwx</li>
+</ul>
+
+<blockquote>
+<p>说明一下：为了验证这个问题，我们另外搭了一个服务器，根本不会有用户访问。而且这个世界上应该没有人会同时带fuckwx这个参数来访问我的服务器。</p>
+</blockquote></li>
+<li><p>微信浏览器访问</p></li>
+<li><p>监控服务端accesslog</p>
+
+<pre><code class="language-shell">wap@iZ2zeg0900kzwn7hnqg3pzZ:~/app/apache-tomcat-7.0.68/logs$ tailf  localhost_access_log.2017-05-17.txt | grep fuckwx
+20170517172145|045|112.17.238.22|2833|GET|/bookinfo/148161271068074.html|200|19|?c=fuckwx|Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.5.3 NetType/4G Language/zh_CN
+20170517172154|054|117.185.27.114|2832|GET|/bookinfo/148161271068074.html|200|8|?c=fuckwx|Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Mobile/14D27 MicroMessenger/6.5.5 NetType/WIFI Language/zh_CN
+</code></pre>
+
+<p><strong>到这里已经基本可以确认，就是有人在重发我的请求</strong><br/>
+我的ip是 <code>112.17.238.22</code> 浙江移动的IP。<br/>
+而这个重发的ip是 <code>117.185.27.114</code> 上海移动的IP。</p></li>
+<li><p>为了确认是微信的问题，还是中间网络服务端的问题。我们通过更换浏览器，更换网络环境进行对比测试，结果发现：只有在微信浏览器下会出现这个问题，与网络环境无关。</p></li>
+<li><p>抓包信息http头结果如下:</p>
+
+<ul>
+<li><p>真实用户请求<br/>
+<img src="media/14950134973267/14950155228633.jpg" alt=""/></p></li>
+<li><p>微信服务器请求</p></li>
+</ul>
+
+<p><img src="media/14950134973267/14950156475859.jpg" alt=""/> </p></li>
+</ol>
+
+<h2 id="toc_4">问题分析</h2>
+
+<p>通过上述的数据我们发现以下问题<br/>
+1. 微信是在真实用户请求后几秒内，接着发起一次同样地址的请求。<br/>
+2. 微信在请求的时候更换了UA。<br/>
+3. 微信在请求的时候没有携带cookie。<br/>
+4. 微信是完全随机IP进行访问，目前来看应该是有好几个段的IP在做这个事情，主要集中在天津和上海。<br/>
+5. 微信是完全随机进行这样的重发操作，找不到任何规律。</p>
+
+<p>这些特性放在一起，就很尴尬了啊：<strong>服务端完全不知道这个请求是机器人还是真实用户</strong>，我们统计出来的访问用户数就明显不准确了，而且会影响人均PV等统计数据。</p>
+
+<h2 id="toc_5">问题处理</h2>
+
+<p>暂时想到的是通过js来埋点的方式进行用户统计，但是需要验证这个微信是否会对ajax请求做同样的重发操作。</p>
+
+<p>其它方案还是没有想到：</p>
+
+<p>如果有哪位读者想到了求分享思路。</p>
+
+<p>同时如果有微信内部的人看到了这个文章，麻烦解惑一下微信这么做的原因。以及我们的应对方案。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Docker安装zabbix-server]]></title>
+    <link href="blog.codingroad.com/use-docker-deploy-zabbix.html"/>
+    <updated>2017-05-26T07:53:09+08:00</updated>
+    <id>blog.codingroad.com/use-docker-deploy-zabbix.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">环境</a>
+</li>
+<li>
+<a href="#toc_1">安装步骤</a>
+<ul>
+<li>
+<a href="#toc_2">安装docker</a>
+</li>
+<li>
+<a href="#toc_3">docker的三个基本概念</a>
+</li>
+<li>
+<a href="#toc_4">获取zabbix-server 镜像</a>
+</li>
+<li>
+<a href="#toc_5">创建数据库</a>
+</li>
+<li>
+<a href="#toc_6">配置容器</a>
+</li>
+<li>
+<a href="#toc_7">运行容器</a>
+</li>
+<li>
+<a href="#toc_8">了解容器的运行状态</a>
+</li>
+<li>
+<a href="#toc_9">进入zabbix的web页面</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">zabbix-server基本设置</a>
+<ul>
+<li>
+<a href="#toc_11">设置成中文</a>
+</li>
+<li>
+<a href="#toc_12">增加第一台主机</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">附录</a>
+<ul>
+<li>
+<a href="#toc_14">拉起容器后初始化数据库失败的问题处理</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>以前折腾过一次部署zabbix环境，觉得比较麻烦，特别是php环境，当时不是很熟悉，折腾了很久。<br/>
+现在我们的业务上也需要zabbix，在部署的时候首先想到的就是能不能用docker来实现快速部署，查了一些资料，发现真的可行，于是便在自己的虚拟机上搭了一套。说明如下</p>
+
+<h2 id="toc_0">环境</h2>
+
+<p>物理机：MacBookPro</p>
+
+<ul>
+<li>虚拟ip：192.168.132.1</li>
+</ul>
+
+<p>虚拟机：ubuntu 14.04 64：</p>
+
+<ul>
+<li>虚拟ip：192.168.132.129</li>
+<li>docker ip：172.17.0.1</li>
+</ul>
+
+<h2 id="toc_1">安装步骤</h2>
+
+<h3 id="toc_2">安装docker</h3>
+
+<p>网上有一大堆材料来说明，我就不在详细说明了。我用官方的一键脚本直接用来安装</p>
+
+<pre><code class="language-sh">curl -sSL https://get.docker.com/ | sh
+</code></pre>
+
+<p>当然如果怕从国外服务器下载慢的话，可以用阿里的镜像</p>
+
+<pre><code class="language-sh">curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+</code></pre>
+
+<p>安装完成后执行 <code>docker version</code> 命令可以查看到docker的版本信息说明安装成功。</p>
+
+<h3 id="toc_3">docker的三个基本概念</h3>
+
+<p>简单介绍一下docker的三个最关键的概念。</p>
+
+<ul>
+<li>image：镜像 就是别人制作好的环境，里面包含程序、资源和配置信息。上传的镜像仓库里面，你要用的话就下载。类似于用光盘安装操作系统时，光盘的内容就是个image。</li>
+<li>container：容器 这是将image运行进来后的实例，可以理解为image是一个程序的资源文件包，而容器是运行这个image后产生的一个进程实例。我们可以用同一份image运行多个container。</li>
+<li>Repository：仓库 用于存放大家制作好的image镜像，其他人有需求的时候直接在仓库中下载就可以了。docker官方提供了docker hub仓库，里面有大量的镜像可以使用。因为国外下载比较慢，你也可以使用国内的一些源来加速，比如阿里云就提供这样的服务。当然随着项目的需要，你也可以自己搭建私有仓库。</li>
+</ul>
+
+<h3 id="toc_4">获取zabbix-server 镜像</h3>
+
+<p>经过分析，我在docker hub上找到了monitoringartist/zabbix-xxl镜像，它目前已经支持到最新的zabbix 3.2版本，而3.1版本之后zabbix官方就内置了中文的语言包，所以就用它了。</p>
+
+<p>使用下面这个命令下载镜像</p>
+
+<pre><code class="language-sh">root@ubuntu:~# docker pull monitoringartist/zabbix-xxl
+</code></pre>
+
+<p>下载完成后通过<code>docker image ls</code> 命令查看本地的镜像列表</p>
+
+<pre><code class="language-sh">root@ubuntu:~# docker image ls
+REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
+monitoringartist/zabbix-xxl   latest              701478bab1b3        2 weeks ago         771MB
+</code></pre>
+
+<p>可以看到这个镜像打开后有771MB，还是蛮大的。</p>
+
+<h3 id="toc_5">创建数据库</h3>
+
+<p>因为zabbix需要用到数据库，我物理机上已经装过了MySQL数据库，所以只需要再里面新增一个database和user就可以了。</p>
+
+<pre><code class="language-sh">CREATE DATABASE zabbix character set utf8 collate utf8_bin;
+
+CREATE USER &#39;zabbix&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;;
+ 
+GRANT all privileges ON zabbix.* TO &#39;zabbix&#39;@&#39;%&#39;;
+</code></pre>
+
+<blockquote>
+<p>注： 创建DATABASE的时候最好指定字符集，我在第一次创建的时候没有指定，导致后面zabbix无法使用数据库。</p>
+</blockquote>
+
+<h3 id="toc_6">配置容器</h3>
+
+<p>虽然可以通过docker run后面加一堆参数的方式来直接拉起容器，但是这样参数不便于管理。所以我使用docker-compose的方式来管理这个容器的配置。</p>
+
+<p>新建一个配置文件 <code>docker-compose.yml</code>， 内容如下</p>
+
+<pre><code class="language-yaml">version: &#39;2&#39;
+services:
+  zabbix-server:
+    image: monitoringartist/zabbix-xxl:latest 
+    container_name: zabbix-server-2
+    network_mode: &quot;bridge&quot;
+    restart: always
+    ports:
+      - &quot;18888:80&quot;
+      - &quot;10052:10051&quot;
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ZS_DBHost=192.168.132.1
+      - ZS_DBUser=zabbix
+      - ZS_DBPassword=123456
+      - ZS_DBName=zabbix
+</code></pre>
+
+<p>说明：</p>
+
+<ul>
+<li>container_name 指定容器的名字。</li>
+<li>ports是做端口映射，这么配置之后，访问虚拟机的18888端口的请求就会转发给容器的80端口。</li>
+<li>enviroment里面我配置的主要是数据库的信息，因为MySQL是安装在物理机上的，所以使用了物理机的ip</li>
+</ul>
+
+<blockquote>
+<p>注：docker-compose是官方提供的一个工具，初始安装docker的时候并不会同步安装这个工具，需要执行 <code>pip install docker-compose</code> 命令来安装这个工具。</p>
+</blockquote>
+
+<h3 id="toc_7">运行容器</h3>
+
+<p>使用docker-compose来加载上面写的配置文件，拉起一个容器。</p>
+
+<pre><code class="language-sh">root@ubuntu:~/app/zabbix/monitoringartist#  docker-compose up -d
+</code></pre>
+
+<blockquote>
+<p>注：需要在配置文件的目录运行这个命令。</p>
+</blockquote>
+
+<p>这样如果不出意外，容器运行后就会连接数据库，初始化表结构和数据，然后就可以使用了。<br/>
+但是我在这里碰到了初始化表结构和数据失败的问题，导致服务无法使用，处理方法见附录。</p>
+
+<h3 id="toc_8">了解容器的运行状态</h3>
+
+<ul>
+<li><p>查看容器运行日志</p>
+
+<pre><code>docker logs -f zabbix-server-2
+</code></pre></li>
+<li><p>进入容器系统的命令行<br/>
+因为我们的镜像其实是包含了一个微型的linux操作系统，然后再上面安装zabbix的，所以它是可以登陆进去并打开shell窗口的。</p>
+
+<pre><code>docker exec -ti zabbix-server-2 /bin/bash
+</code></pre>
+
+<p>这样就可以在容器里面执行shell命令，像维护linux主机一样来操作这个容器了。</p></li>
+</ul>
+
+<h3 id="toc_9">进入zabbix的web页面</h3>
+
+<p>在物理机上打开浏览器，访问<a href="http://192.168.132.129:18888/">http://192.168.132.129:18888/</a><br/>
+就可以打开web页面了，用默认用户名Admin/zabbix登陆进去就可以了。</p>
+
+<h2 id="toc_10">zabbix-server基本设置</h2>
+
+<h3 id="toc_11">设置成中文</h3>
+
+<p>毕竟之前没怎么用过zabbix，纯英文的界面学习成本比较高，所以上来第一件事情就是将其设置成中文。</p>
+
+<p>设置成中文非常简单，点右上角的小人，然后在语言那里选中文就好了<br/>
+<img src="media/14957563898448/14957601173919.jpg" alt=""/></p>
+
+<p>修改后页面就成了中文的了，但是还有一个问题需要处理，否则chart的界面里面会有乱码。参考链接 <a href="http://coolnull.com/3395.html">http://coolnull.com/3395.html</a></p>
+
+<h3 id="toc_12">增加第一台主机</h3>
+
+<p>在配置--&gt;主机中找到Zabbix server，点启用，就完成了将zabbix运行的主机加入监控的动作。</p>
+
+<p>在主机聚合图里面就可以看到这些统计信息了。</p>
+
+<p><img src="media/14957563898448/14957605537200.jpg" alt=""/></p>
+
+<h2 id="toc_13">附录</h2>
+
+<h3 id="toc_14">拉起容器后初始化数据库失败的问题处理</h3>
+
+<p>因为我第一次创建数据库的时候没有设置字符集，导致拉起容器的时候初始化数据库失败。</p>
+
+<p>为了解决这个问题，我们需要进行容器的命令行，手动去执行sql文件，方法如下：</p>
+
+<ul>
+<li><p>进入容器命令行，方法参见上面的介绍</p>
+
+<pre><code class="language-sh">root@ubuntu:~/app/zabbix/monitoringartist# docker exec -ti zabbix-server-2 /bin/bash
+[root@4fe2124b522a /]# 
+</code></pre></li>
+<li><p>查找初始化的sql文件</p>
+
+<pre><code class="language-sh">[root@4fe2124b522a /]# find / -name &#39;*.sql&#39;
+/usr/local/src/zabbix/database/mysql/images.sql
+/usr/local/src/zabbix/database/mysql/data.sql
+/usr/local/src/zabbix/database/mysql/schema.sql
+</code></pre></li>
+<li><p>手动导入</p>
+
+<pre><code class="language-sh">[root@4fe2124b522a /]# cd /usr/local/src/zabbix/database/mysql/
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; schema.sql
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; images.sql
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; data.sql
+</code></pre></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[django 表单开启csrf验证]]></title>
+    <link href="blog.codingroad.com/python-django-csrf-form.html"/>
+    <updated>2017-08-14T15:56:56+08:00</updated>
+    <id>blog.codingroad.com/python-django-csrf-form.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">template层</h2>
+
+<pre><code class="language-html">&lt;form class=&quot;form-horizontal&quot; method=&quot;post&quot; id=&quot;iptFrm&quot; action=&quot;{%url &#39;api_import_post&#39; %}&quot;&gt;{% csrf_token %}
+&lt;/form&gt;
+</code></pre>
+
+<h2 id="toc_1">view层</h2>
+
+<pre><code class="language-python">
+from django.views.decorators.csrf import csrf_protect
+
+@csrf_protect
+def import_post(request):
+    return HttpResponse(&quot;Success&quot;)
+</code></pre>
+
+<h2 id="toc_2">settings</h2>
+
+<p>请确认MIDDLEWARE中引入了 <code>django.middleware.csrf.CsrfViewMiddleware</code> ，正常情况下是默认引入的。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[django template循环显示内容]]></title>
+    <link href="blog.codingroad.com/python-django-template-repeat.html"/>
+    <updated>2017-08-14T16:01:55+08:00</updated>
+    <id>blog.codingroad.com/python-django-template-repeat.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0">需求</h2>
+
+<p>如下图标红框的区块所示，我在blog的文章列表页，每行要显示2个文章。</p>
+
+<p>如果是在程序里面大家都知道用mod去控制循环就好了，但是在template里面确不支持mod方法，那应该怎样实现呢？</p>
+
+<p><img src="media/15026977152618/15026991225998.jpg" alt=""/></p>
+
+<h2 id="toc_1">方法</h2>
+
+<p>利用template自己的变量forloop可以实现我们期望的效果，具体方法如下：</p>
+
+<p>在view层准备好con_post_list 文章列表，然后在template中用如下方法实现：</p>
+
+<pre><code class="language-html">    {% if con_post_list %}
+        {% for conpost in con_post_list %}
+            {% if forloop.counter0|divisibleby:2 %}&lt;div class=&quot;row&quot;&gt;{% endif %}
+                &lt;div class=&quot;col-xs-12 col-md-6&quot;&gt;
+                    &lt;div class=&quot;media&quot;&gt;
+                      &lt;hr&gt;
+                      &lt;div class=&quot;media-left&quot;&gt;
+                        &lt;a href=&quot;#&quot;&gt;
+                            &lt;img class=&quot;media-object&quot; src=&quot;&quot; width=25&gt;
+                        &lt;/a&gt;
+                      &lt;/div&gt;
+                      &lt;div class=&quot;media-body&quot;&gt;
+                        &lt;h4 class=&quot;media-heading&quot;&gt;{{ conpost.title }}&lt;/h4&gt;
+                        &lt;p&gt;发表于: {{ conpost.publishdate }}&lt;/p&gt;
+                        &lt;p&gt;{{ conpost.description }}&lt;/p&gt;
+                      &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;br&gt;
+                &lt;/div&gt;
+            {% if forloop.counter|divisibleby:2 %}&lt;/div&gt;{% endif %}
+        {% endfor %}
+    {% endif %}
+</code></pre>
+
+<p>最核心的部分如下</p>
+
+<pre><code class="language-html">{% if forloop.counter0|divisibleby:2 %}&lt;div class=&quot;row&quot;&gt;{% endif %}
+{% if forloop.counter|divisibleby:2 %}&lt;/div&gt;{% endif %}
+</code></pre>
+
+<p>这个表示在循环中，每循环两次则展示if里面的内容，使用这个特性刚好实现我们的需求。</p>
+
+<h2 id="toc_2">More</h2>
+
+<p>forloop是用来做循环控制的，常用的变量有</p>
+
+<ul>
+<li>forloop.counter0 获取当前迭代值，从0开始计数</li>
+<li>forloop.counter  获取当前迭代值，从1开始计数</li>
+<li>forloop.first 是否第1次进入循环</li>
+<li>forloop.last 是否最后1次进入循环</li>
+</ul>
+
+<p>可以在template中直接使用，如</p>
+
+<pre><code class="language-html">{% for conpost in con_post_list %}
+    {% if forloop.first %} 
+        &lt;h1&gt;start-开始循环&lt;/h1&gt;
+    {% endif %}
+    &lt;h2&gt;{{ forloop.counter }} - {{ conpost.title }}&lt;/h2&gt;
+    {% if forloop.last %} 
+        &lt;h1&gt;end&lt;/h1&gt;
+    {% endif %}
+{% endfor %}
+</code></pre>
+
+<p>参考<br/>
+<a href="https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#for">django-template-builtins-for</a></p>
 
 ]]></content>
   </entry>

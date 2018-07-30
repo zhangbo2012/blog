@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  python使用MySQLdb时报'MySQL server has gone away' - 编程之路
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="编程之路" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">编程之路</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 编程之路</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>mac</label></li>
+
+          
+            <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>python</label></li>
+
+          
+            <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+          
+            <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+          
+            <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+          
+            <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+          
+            <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+          
+            <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+          
+            <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+          
+            <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+          
+            <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+          
+            <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+          
+            <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+          
+            <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>java</label></li>
+
+          
+            <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>运维</label></li>
+
+          
+            <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+          
+            <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+          
+            <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+          
+            <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+          
+            <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+          
+            <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+          
+            <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>mac</span></li>
+                        
+                          <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>python</span></li>
+                        
+                          <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+                        
+                          <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+                        
+                          <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+                        
+                          <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+                        
+                          <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+                        
+                          <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+                        
+                          <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+                        
+                          <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+                        
+                          <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+                        
+                          <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+                        
+                          <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+                        
+                          <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>java</span></li>
+                        
+                          <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>运维</span></li>
+                        
+                          <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+                        
+                          <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+                        
+                          <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+                        
+                          <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+                        
+                          <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+                        
+                          <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+                        
+                          <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>python使用MySQLdb时报'MySQL server has gone away'</h1>
+
+<ul>
+<li>
+<a href="#toc_0">1、现象</a>
+</li>
+<li>
+<a href="#toc_1">2、原因</a>
+</li>
+<li>
+<a href="#toc_2">3、解决方案</a>
+</li>
+<li>
+<a href="#toc_3">4、效果</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">1、现象</h2>
+
+<p>在bottle项目中，自己使用mysqldb连接数据库来执行SQL，在程序启动的时候会初始化数据连接，然后全局共享这个连接。</p>
+
+<p>但是在程序运行一段时间后就会出现执行SQL失败的情况，重启后即可恢复。</p>
+
+<p>对应的错误日志如下：</p>
+
+<pre><code>2017-04-09 13:45:25,624|ERROR|MySQL.py|Line:67|Run Select Failed, SQL=
+ select userid, companyid, role, status from dw_admin_user where username = &#39;guash&#39; and password = &#39;6F0E9B51C72BA95911638B3971F&#39;  
+, ResKeys=[&#39;userid&#39;, &#39;companyid&#39;, &#39;role&#39;, &#39;status&#39;], Error=(2006, &#39;MySQL server has gone away&#39;)
+</code></pre>
+
+<h2 id="toc_1">2、原因</h2>
+
+<p>这个项目在晚间没有人访问，长时间没有执行SQL，导致MySQL服务端将连接中断，再次执行SQL时就会出现此错误。</p>
+
+<h2 id="toc_2">3、解决方案</h2>
+
+<p>在执行SQL的动作前加一个ping操作，判断连接是否存在，如果不存在则自动重新连接。</p>
+
+<pre><code class="language-python">
+    def run_select(self, sql, reskeys):
+        if not self.connected:
+            res = self.connect()
+            if not res:
+                return None
+
+        try:
+            # ping操作，判断连接是否存在，不存在则自动重新连接
+            self._mysql.ping(True)
+            
+            cursor = self._mysql.cursor()
+            self.logger.info(&quot;run select: SQL=\n%s \n, ResKeys=%s, db=%s&quot; % (sql, str(reskeys), self.dbname))
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            return rows
+        except Exception as e:
+            self.logger.error(&quot;Run Select Failed, SQL=\n%s \n, ResKeys=%s, Error=%s&quot; % (sql, str(reskeys), e.__str__()))
+            return None
+</code></pre>
+
+<h2 id="toc_3">4、效果</h2>
+
+<p>运行两天未出现之前问题，继续观察。<br/>
+抽空可以研究一下django的源码，因为在django项目中从未出现此类问题。</p>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="use-nginx-deploy-bottle-project.html"  title="Previous Post: nginx + uwsgi 部署bottle">&laquo; nginx + uwsgi 部署bottle</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="monitor-dns-resove.html" 
+	        title="Next Post: 域名解析情况监控">域名解析情况监控 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+
+	<div id="container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+		  owner: 'zhangbo2012',
+		  repo: 'blog',
+		  oauth: {
+		    client_id: 'a7a2ffcfea682104b59d',
+		    client_secret: 'b1f9534279380d75d3d22895904e06b8b0716f44',
+		  },
+		})
+		gitment.render('container')
+	</script>
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = 'python-mysql-has-gone-away.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+  </body>
+</html>

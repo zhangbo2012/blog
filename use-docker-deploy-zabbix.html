@@ -1,0 +1,536 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Docker安装zabbix-server - 编程之路
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="编程之路" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">编程之路</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 编程之路</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>mac</label></li>
+
+          
+            <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>python</label></li>
+
+          
+            <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+          
+            <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+          
+            <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+          
+            <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+          
+            <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+          
+            <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+          
+            <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+          
+            <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+          
+            <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+          
+            <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+          
+            <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+          
+            <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>java</label></li>
+
+          
+            <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>运维</label></li>
+
+          
+            <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+          
+            <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+          
+            <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+          
+            <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+          
+            <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+          
+            <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+          
+            <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>mac</span></li>
+                        
+                          <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>python</span></li>
+                        
+                          <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+                        
+                          <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+                        
+                          <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+                        
+                          <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+                        
+                          <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+                        
+                          <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+                        
+                          <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+                        
+                          <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+                        
+                          <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+                        
+                          <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+                        
+                          <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+                        
+                          <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>java</span></li>
+                        
+                          <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>运维</span></li>
+                        
+                          <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+                        
+                          <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+                        
+                          <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+                        
+                          <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+                        
+                          <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+                        
+                          <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+                        
+                          <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>Docker安装zabbix-server</h1>
+
+<ul>
+<li>
+<a href="#toc_0">环境</a>
+</li>
+<li>
+<a href="#toc_1">安装步骤</a>
+<ul>
+<li>
+<a href="#toc_2">安装docker</a>
+</li>
+<li>
+<a href="#toc_3">docker的三个基本概念</a>
+</li>
+<li>
+<a href="#toc_4">获取zabbix-server 镜像</a>
+</li>
+<li>
+<a href="#toc_5">创建数据库</a>
+</li>
+<li>
+<a href="#toc_6">配置容器</a>
+</li>
+<li>
+<a href="#toc_7">运行容器</a>
+</li>
+<li>
+<a href="#toc_8">了解容器的运行状态</a>
+</li>
+<li>
+<a href="#toc_9">进入zabbix的web页面</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_10">zabbix-server基本设置</a>
+<ul>
+<li>
+<a href="#toc_11">设置成中文</a>
+</li>
+<li>
+<a href="#toc_12">增加第一台主机</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_13">附录</a>
+<ul>
+<li>
+<a href="#toc_14">拉起容器后初始化数据库失败的问题处理</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>以前折腾过一次部署zabbix环境，觉得比较麻烦，特别是php环境，当时不是很熟悉，折腾了很久。<br/>
+现在我们的业务上也需要zabbix，在部署的时候首先想到的就是能不能用docker来实现快速部署，查了一些资料，发现真的可行，于是便在自己的虚拟机上搭了一套。说明如下</p>
+
+<h2 id="toc_0">环境</h2>
+
+<p>物理机：MacBookPro</p>
+
+<ul>
+<li>虚拟ip：192.168.132.1</li>
+</ul>
+
+<p>虚拟机：ubuntu 14.04 64：</p>
+
+<ul>
+<li>虚拟ip：192.168.132.129</li>
+<li>docker ip：172.17.0.1</li>
+</ul>
+
+<h2 id="toc_1">安装步骤</h2>
+
+<h3 id="toc_2">安装docker</h3>
+
+<p>网上有一大堆材料来说明，我就不在详细说明了。我用官方的一键脚本直接用来安装</p>
+
+<pre><code class="language-sh">curl -sSL https://get.docker.com/ | sh
+</code></pre>
+
+<p>当然如果怕从国外服务器下载慢的话，可以用阿里的镜像</p>
+
+<pre><code class="language-sh">curl -sSL http://acs-public-mirror.oss-cn-hangzhou.aliyuncs.com/docker-engine/internet | sh -
+</code></pre>
+
+<p>安装完成后执行 <code>docker version</code> 命令可以查看到docker的版本信息说明安装成功。</p>
+
+<h3 id="toc_3">docker的三个基本概念</h3>
+
+<p>简单介绍一下docker的三个最关键的概念。</p>
+
+<ul>
+<li>image：镜像 就是别人制作好的环境，里面包含程序、资源和配置信息。上传的镜像仓库里面，你要用的话就下载。类似于用光盘安装操作系统时，光盘的内容就是个image。</li>
+<li>container：容器 这是将image运行进来后的实例，可以理解为image是一个程序的资源文件包，而容器是运行这个image后产生的一个进程实例。我们可以用同一份image运行多个container。</li>
+<li>Repository：仓库 用于存放大家制作好的image镜像，其他人有需求的时候直接在仓库中下载就可以了。docker官方提供了docker hub仓库，里面有大量的镜像可以使用。因为国外下载比较慢，你也可以使用国内的一些源来加速，比如阿里云就提供这样的服务。当然随着项目的需要，你也可以自己搭建私有仓库。</li>
+</ul>
+
+<h3 id="toc_4">获取zabbix-server 镜像</h3>
+
+<p>经过分析，我在docker hub上找到了monitoringartist/zabbix-xxl镜像，它目前已经支持到最新的zabbix 3.2版本，而3.1版本之后zabbix官方就内置了中文的语言包，所以就用它了。</p>
+
+<p>使用下面这个命令下载镜像</p>
+
+<pre><code class="language-sh">root@ubuntu:~# docker pull monitoringartist/zabbix-xxl
+</code></pre>
+
+<p>下载完成后通过<code>docker image ls</code> 命令查看本地的镜像列表</p>
+
+<pre><code class="language-sh">root@ubuntu:~# docker image ls
+REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
+monitoringartist/zabbix-xxl   latest              701478bab1b3        2 weeks ago         771MB
+</code></pre>
+
+<p>可以看到这个镜像打开后有771MB，还是蛮大的。</p>
+
+<h3 id="toc_5">创建数据库</h3>
+
+<p>因为zabbix需要用到数据库，我物理机上已经装过了MySQL数据库，所以只需要再里面新增一个database和user就可以了。</p>
+
+<pre><code class="language-sh">CREATE DATABASE zabbix character set utf8 collate utf8_bin;
+
+CREATE USER &#39;zabbix&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;;
+ 
+GRANT all privileges ON zabbix.* TO &#39;zabbix&#39;@&#39;%&#39;;
+</code></pre>
+
+<blockquote>
+<p>注： 创建DATABASE的时候最好指定字符集，我在第一次创建的时候没有指定，导致后面zabbix无法使用数据库。</p>
+</blockquote>
+
+<h3 id="toc_6">配置容器</h3>
+
+<p>虽然可以通过docker run后面加一堆参数的方式来直接拉起容器，但是这样参数不便于管理。所以我使用docker-compose的方式来管理这个容器的配置。</p>
+
+<p>新建一个配置文件 <code>docker-compose.yml</code>， 内容如下</p>
+
+<pre><code class="language-yaml">version: &#39;2&#39;
+services:
+  zabbix-server:
+    image: monitoringartist/zabbix-xxl:latest 
+    container_name: zabbix-server-2
+    network_mode: &quot;bridge&quot;
+    restart: always
+    ports:
+      - &quot;18888:80&quot;
+      - &quot;10052:10051&quot;
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ZS_DBHost=192.168.132.1
+      - ZS_DBUser=zabbix
+      - ZS_DBPassword=123456
+      - ZS_DBName=zabbix
+</code></pre>
+
+<p>说明：</p>
+
+<ul>
+<li>container_name 指定容器的名字。</li>
+<li>ports是做端口映射，这么配置之后，访问虚拟机的18888端口的请求就会转发给容器的80端口。</li>
+<li>enviroment里面我配置的主要是数据库的信息，因为MySQL是安装在物理机上的，所以使用了物理机的ip</li>
+</ul>
+
+<blockquote>
+<p>注：docker-compose是官方提供的一个工具，初始安装docker的时候并不会同步安装这个工具，需要执行 <code>pip install docker-compose</code> 命令来安装这个工具。</p>
+</blockquote>
+
+<h3 id="toc_7">运行容器</h3>
+
+<p>使用docker-compose来加载上面写的配置文件，拉起一个容器。</p>
+
+<pre><code class="language-sh">root@ubuntu:~/app/zabbix/monitoringartist#  docker-compose up -d
+</code></pre>
+
+<blockquote>
+<p>注：需要在配置文件的目录运行这个命令。</p>
+</blockquote>
+
+<p>这样如果不出意外，容器运行后就会连接数据库，初始化表结构和数据，然后就可以使用了。<br/>
+但是我在这里碰到了初始化表结构和数据失败的问题，导致服务无法使用，处理方法见附录。</p>
+
+<h3 id="toc_8">了解容器的运行状态</h3>
+
+<ul>
+<li><p>查看容器运行日志</p>
+
+<pre><code>docker logs -f zabbix-server-2
+</code></pre></li>
+<li><p>进入容器系统的命令行<br/>
+因为我们的镜像其实是包含了一个微型的linux操作系统，然后再上面安装zabbix的，所以它是可以登陆进去并打开shell窗口的。</p>
+
+<pre><code>docker exec -ti zabbix-server-2 /bin/bash
+</code></pre>
+
+<p>这样就可以在容器里面执行shell命令，像维护linux主机一样来操作这个容器了。</p></li>
+</ul>
+
+<h3 id="toc_9">进入zabbix的web页面</h3>
+
+<p>在物理机上打开浏览器，访问<a href="http://192.168.132.129:18888/">http://192.168.132.129:18888/</a><br/>
+就可以打开web页面了，用默认用户名Admin/zabbix登陆进去就可以了。</p>
+
+<h2 id="toc_10">zabbix-server基本设置</h2>
+
+<h3 id="toc_11">设置成中文</h3>
+
+<p>毕竟之前没怎么用过zabbix，纯英文的界面学习成本比较高，所以上来第一件事情就是将其设置成中文。</p>
+
+<p>设置成中文非常简单，点右上角的小人，然后在语言那里选中文就好了<br/>
+<img src="media/14957563898448/14957601173919.jpg" alt=""/></p>
+
+<p>修改后页面就成了中文的了，但是还有一个问题需要处理，否则chart的界面里面会有乱码。参考链接 <a href="http://coolnull.com/3395.html">http://coolnull.com/3395.html</a></p>
+
+<h3 id="toc_12">增加第一台主机</h3>
+
+<p>在配置--&gt;主机中找到Zabbix server，点启用，就完成了将zabbix运行的主机加入监控的动作。</p>
+
+<p>在主机聚合图里面就可以看到这些统计信息了。</p>
+
+<p><img src="media/14957563898448/14957605537200.jpg" alt=""/></p>
+
+<h2 id="toc_13">附录</h2>
+
+<h3 id="toc_14">拉起容器后初始化数据库失败的问题处理</h3>
+
+<p>因为我第一次创建数据库的时候没有设置字符集，导致拉起容器的时候初始化数据库失败。</p>
+
+<p>为了解决这个问题，我们需要进行容器的命令行，手动去执行sql文件，方法如下：</p>
+
+<ul>
+<li><p>进入容器命令行，方法参见上面的介绍</p>
+
+<pre><code class="language-sh">root@ubuntu:~/app/zabbix/monitoringartist# docker exec -ti zabbix-server-2 /bin/bash
+[root@4fe2124b522a /]# 
+</code></pre></li>
+<li><p>查找初始化的sql文件</p>
+
+<pre><code class="language-sh">[root@4fe2124b522a /]# find / -name &#39;*.sql&#39;
+/usr/local/src/zabbix/database/mysql/images.sql
+/usr/local/src/zabbix/database/mysql/data.sql
+/usr/local/src/zabbix/database/mysql/schema.sql
+</code></pre></li>
+<li><p>手动导入</p>
+
+<pre><code class="language-sh">[root@4fe2124b522a /]# cd /usr/local/src/zabbix/database/mysql/
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; schema.sql
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; images.sql
+[root@4fe2124b522a mysql]# mysql -u zabbix -p123456 zabbix2 -h 192.168.132.1 &lt; data.sql
+</code></pre></li>
+</ul>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="wechat-multiple-requst.html"  title="Previous Post: 微信的坑-微信服务器重发页面请求的问题">&laquo; 微信的坑-微信服务器重发页面请求的问题</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="python-django-csrf-form.html" 
+	        title="Next Post: django 表单开启csrf验证">django 表单开启csrf验证 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+
+	<div id="container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+		  owner: 'zhangbo2012',
+		  repo: 'blog',
+		  oauth: {
+		    client_id: 'a7a2ffcfea682104b59d',
+		    client_secret: 'b1f9534279380d75d3d22895904e06b8b0716f44',
+		  },
+		})
+		gitment.render('container')
+	</script>
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = 'use-docker-deploy-zabbix.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>blog.codingroad.com/</loc>
-  <lastmod>2018-07-13T15:57:50+08:00</lastmod>
+  <lastmod>2018-07-30T11:36:50+08:00</lastmod>
 </url>
 
 <url>
@@ -20,6 +20,96 @@
   <lastmod>2018-04-24T15:03:46+08:00</lastmod>
 </url>
 
+<url>
+  <loc>blog.codingroad.com/python-mysql-charset.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/om-ssl-config.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/om-aliyun-use-oss-as-nas.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-xml.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-ip.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-set-class-attr-in-init.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-config-in-different-env.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-django-asyn-task.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-send-email.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/use-nginx-deploy-bottle-project.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-mysql-has-gone-away.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/monitor-dns-resove.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/zhejiang-cmcc-http-status-hijacking.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/wechat-multiple-requst.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/use-docker-deploy-zabbix.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-django-csrf-form.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/python-django-template-repeat.html</loc>
+  <lastmod>2017-07-30T11:12:01+08:00</lastmod>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/jvm-config.html</loc>
+  <lastmod>2017-07-30T11:06:54+08:00</lastmod>
+</url>
+
 
 
 <url>
@@ -28,6 +118,14 @@
 
 <url>
   <loc>blog.codingroad.com/python.html</loc>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/java.html</loc>
+</url>
+
+<url>
+  <loc>blog.codingroad.com/operation-and-maintenance.html</loc>
 </url>
 
 

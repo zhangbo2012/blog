@@ -1,0 +1,373 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  微信的坑-微信服务器重发页面请求的问题 - 编程之路
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="编程之路" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">编程之路</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 编程之路</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>mac</label></li>
+
+          
+            <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>python</label></li>
+
+          
+            <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+          
+            <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+          
+            <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+          
+            <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+          
+            <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+          
+            <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+          
+            <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+          
+            <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+          
+            <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+          
+            <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+          
+            <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+          
+            <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>java</label></li>
+
+          
+            <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>运维</label></li>
+
+          
+            <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+          
+            <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+          
+            <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+          
+            <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+          
+            <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+          
+            <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+          
+            <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>mac</span></li>
+                        
+                          <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>python</span></li>
+                        
+                          <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+                        
+                          <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+                        
+                          <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+                        
+                          <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+                        
+                          <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+                        
+                          <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+                        
+                          <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+                        
+                          <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+                        
+                          <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+                        
+                          <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+                        
+                          <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+                        
+                          <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>java</span></li>
+                        
+                          <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>运维</span></li>
+                        
+                          <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+                        
+                          <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+                        
+                          <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+                        
+                          <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+                        
+                          <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+                        
+                          <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+                        
+                          <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>微信的坑-微信服务器重发页面请求的问题</h1>
+
+<p>这是一个大坑，可能有人还没有注意到这个问题，但它确实存在，而且可能会影响你的统计数据。</p>
+
+<h2 id="toc_0">现象</h2>
+
+<p>近期我们在微信上做推广后，做数据分析时发现一些异常数据：</p>
+
+<ul>
+<li>大量用户来自天津、上海的ip</li>
+<li>这些用户每次只访问一个页面，产生session之后就再也不来了</li>
+</ul>
+
+<p>最初我们认为是下游推广渠道在坑我们钱，用天津和上海的服务器来刷访问用户数，近而骗取我们的推广费用。</p>
+
+<p>然而和多家合作方推广后都发现同样的问题，所以觉得这个事情并有这么简单。经过一系列的排查之后才发现，这个大坑居然是微信造成的。</p>
+
+<h2 id="toc_1">问题定位</h2>
+
+<p>为了确认这些“用户”是真用户，还是假用户，我们尝试了大量手段来分析，此处省略5000字，Fuck！</p>
+
+<p>最终我们联想到了UC浏览器预读功能，开始怀疑是某个地方的预读导致，于是按这个思路来进行定位。</p>
+
+<blockquote>
+<p>关于UC浏览器的预读功能：开启此功能后，在读小说时，浏览器会分析页面中的“下一章”链接，并后台提前请求服务端拿到响应数据，等用户点下一章的时候，页面就可以瞬间展示出来。</p>
+</blockquote>
+
+<h3 id="toc_2">定位思路：</h3>
+
+<ul>
+<li>组装一个没有人会访问的URL</li>
+<li>通过微信浏览器访问该URL</li>
+<li>监控服务端日志，确认是否会有其它人发起同样的请求，如果有，那就说明微信或者中间的网络服务商有人在预读。</li>
+</ul>
+
+<h3 id="toc_3">定位过程</h3>
+
+<ol>
+<li><p>组装一个没有人会访问的URL</p>
+
+<ul>
+<li>正常的URL：/bookinfo/148161271068074.html</li>
+<li>组装的URL：/bookinfo/148161271068074.html?c=fuckwx</li>
+</ul>
+
+<blockquote>
+<p>说明一下：为了验证这个问题，我们另外搭了一个服务器，根本不会有用户访问。而且这个世界上应该没有人会同时带fuckwx这个参数来访问我的服务器。</p>
+</blockquote></li>
+<li><p>微信浏览器访问</p></li>
+<li><p>监控服务端accesslog</p>
+
+<pre><code class="language-shell">wap@iZ2zeg0900kzwn7hnqg3pzZ:~/app/apache-tomcat-7.0.68/logs$ tailf  localhost_access_log.2017-05-17.txt | grep fuckwx
+20170517172145|045|112.17.238.22|2833|GET|/bookinfo/148161271068074.html|200|19|?c=fuckwx|Mozilla/5.0 (iPhone; CPU iPhone OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12B440 MicroMessenger/6.5.3 NetType/4G Language/zh_CN
+20170517172154|054|117.185.27.114|2832|GET|/bookinfo/148161271068074.html|200|8|?c=fuckwx|Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Mobile/14D27 MicroMessenger/6.5.5 NetType/WIFI Language/zh_CN
+</code></pre>
+
+<p><strong>到这里已经基本可以确认，就是有人在重发我的请求</strong><br/>
+我的ip是 <code>112.17.238.22</code> 浙江移动的IP。<br/>
+而这个重发的ip是 <code>117.185.27.114</code> 上海移动的IP。</p></li>
+<li><p>为了确认是微信的问题，还是中间网络服务端的问题。我们通过更换浏览器，更换网络环境进行对比测试，结果发现：只有在微信浏览器下会出现这个问题，与网络环境无关。</p></li>
+<li><p>抓包信息http头结果如下:</p>
+
+<ul>
+<li><p>真实用户请求<br/>
+<img src="media/14950134973267/14950155228633.jpg" alt=""/></p></li>
+<li><p>微信服务器请求</p></li>
+</ul>
+
+<p><img src="media/14950134973267/14950156475859.jpg" alt=""/> </p></li>
+</ol>
+
+<h2 id="toc_4">问题分析</h2>
+
+<p>通过上述的数据我们发现以下问题<br/>
+1. 微信是在真实用户请求后几秒内，接着发起一次同样地址的请求。<br/>
+2. 微信在请求的时候更换了UA。<br/>
+3. 微信在请求的时候没有携带cookie。<br/>
+4. 微信是完全随机IP进行访问，目前来看应该是有好几个段的IP在做这个事情，主要集中在天津和上海。<br/>
+5. 微信是完全随机进行这样的重发操作，找不到任何规律。</p>
+
+<p>这些特性放在一起，就很尴尬了啊：<strong>服务端完全不知道这个请求是机器人还是真实用户</strong>，我们统计出来的访问用户数就明显不准确了，而且会影响人均PV等统计数据。</p>
+
+<h2 id="toc_5">问题处理</h2>
+
+<p>暂时想到的是通过js来埋点的方式进行用户统计，但是需要验证这个微信是否会对ajax请求做同样的重发操作。</p>
+
+<p>其它方案还是没有想到：</p>
+
+<p>如果有哪位读者想到了求分享思路。</p>
+
+<p>同时如果有微信内部的人看到了这个文章，麻烦解惑一下微信这么做的原因。以及我们的应对方案。</p>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="zhejiang-cmcc-http-status-hijacking.html"  title="Previous Post: 浙江移动劫持404、500等响应码问题处理">&laquo; 浙江移动劫持404、500等响应码问题处理</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="use-docker-deploy-zabbix.html" 
+	        title="Next Post: Docker安装zabbix-server">Docker安装zabbix-server &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+
+	<div id="container"></div>
+	<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+	<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+	<script>
+		var gitment = new Gitment({
+		  owner: 'zhangbo2012',
+		  repo: 'blog',
+		  oauth: {
+		    client_id: 'a7a2ffcfea682104b59d',
+		    client_secret: 'b1f9534279380d75d3d22895904e06b8b0716f44',
+		  },
+		})
+		gitment.render('container')
+	</script>
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = 'wechat-multiple-requst.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+  </body>
+</html>

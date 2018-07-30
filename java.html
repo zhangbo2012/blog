@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  java - 编程之路
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="编程之路" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">编程之路</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 编程之路</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>mac</label></li>
+
+          
+            <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>python</label></li>
+
+          
+            <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+          
+            <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+          
+            <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+          
+            <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+          
+            <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+          
+            <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+          
+            <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+          
+            <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+          
+            <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+          
+            <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+          
+            <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+          
+            <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>java</label></li>
+
+          
+            <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>运维</label></li>
+
+          
+            <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+          
+            <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+          
+            <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+          
+            <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+          
+            <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+          
+            <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+          
+            <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>mac</span></li>
+                        
+                          <li><a title="关于12' MacBook使用的记录" href="why-choose-macbook.html">关于12' MacBook使用的记录</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>python</span></li>
+                        
+                          <li><a title="Python 串口加GUI编程【预告】" href="python-gui-serial.html">Python 串口加GUI编程【预告】</a></li>
+                        
+                          <li><a title="用python分析了20万场吃鸡数据" href="python-get-and-analysis-pubg-mobile-data.html">用python分析了20万场吃鸡数据</a></li>
+                        
+                          <li><a title="MySQL中文乱码" href="python-mysql-charset.html">MySQL中文乱码</a></li>
+                        
+                          <li><a title="python xml操作" href="python-xml.html">python xml操作</a></li>
+                        
+                          <li><a title="python ip操作" href="python-ip.html">python ip操作</a></li>
+                        
+                          <li><a title="python 在__init__中批量设置类属性" href="python-set-class-attr-in-init.html">python 在__init__中批量设置类属性</a></li>
+                        
+                          <li><a title="python 项目开发技巧 - 配置与代码分离" href="python-config-in-different-env.html">python 项目开发技巧 - 配置与代码分离</a></li>
+                        
+                          <li><a title="django 通过thread实现异步任务" href="python-django-asyn-task.html">django 通过thread实现异步任务</a></li>
+                        
+                          <li><a title="python-发送邮件" href="python-send-email.html">python-发送邮件</a></li>
+                        
+                          <li><a title="python使用MySQLdb时报'MySQL server has gone away'" href="python-mysql-has-gone-away.html">python使用MySQLdb时报'MySQL server has gone away'</a></li>
+                        
+                          <li><a title="django 表单开启csrf验证" href="python-django-csrf-form.html">django 表单开启csrf验证</a></li>
+                        
+                          <li><a title="django template循环显示内容" href="python-django-template-repeat.html">django template循环显示内容</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>java</span></li>
+                        
+                          <li><a title="JVM" href="jvm-config.html">JVM</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>运维</span></li>
+                        
+                          <li><a title="HTTPS" href="om-ssl-config.html">HTTPS</a></li>
+                        
+                          <li><a title="OSS" href="om-aliyun-use-oss-as-nas.html">OSS</a></li>
+                        
+                          <li><a title="nginx + uwsgi 部署bottle" href="use-nginx-deploy-bottle-project.html">nginx + uwsgi 部署bottle</a></li>
+                        
+                          <li><a title="域名解析情况监控" href="monitor-dns-resove.html">域名解析情况监控</a></li>
+                        
+                          <li><a title="浙江移动劫持404、500等响应码问题处理" href="zhejiang-cmcc-http-status-hijacking.html">浙江移动劫持404、500等响应码问题处理</a></li>
+                        
+                          <li><a title="微信的坑-微信服务器重发页面请求的问题" href="wechat-multiple-requst.html">微信的坑-微信服务器重发页面请求的问题</a></li>
+                        
+                          <li><a title="Docker安装zabbix-server" href="use-docker-deploy-zabbix.html">Docker安装zabbix-server</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ 
+
+
+	
+		<div class="markdown-body">
+		<h1>JVM</h1>
+
+		<ul>
+<li>
+<a href="#toc_0">JVM内存配置</a>
+<ul>
+<li>
+<a href="#toc_1">异常的FullGC引发的故障</a>
+</li>
+<li>
+<a href="#toc_2">调整虚拟机内存大小</a>
+</li>
+<li>
+<a href="#toc_3">正常FullGC记录</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">深入学习虚拟机内存分区</a>
+<ul>
+<li>
+<a href="#toc_5">虚拟机内存分区说明</a>
+</li>
+<li>
+<a href="#toc_6">查看当前各区占用内存的大小</a>
+</li>
+<li>
+<a href="#toc_7">后期优化记录</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_8">参考文献</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">JVM内存配置</h2>
+
+<h3 id="toc_1">异常的FullGC引发的故障</h3>
+
+<p>系统中的portal模块近期频繁出现cpu使用率达到100%的情况，使用top命令查看，发现确实是java业务进程占用异常，重启后可以恢复正常，但一到两天后再次出现。</p>
+
+<p>通过jstat命令查看GC情况时发现是因为老生代被占满，导致进程一直在进行FullGC，且FullGC后老生代仍然使用率为100%，现象如下：</p>
+
+<p><img src="media/14845475779978/14845487893963.jpg" alt=""/></p>
+
+<p>出现这种情况一般有两个可能：</p>
+
+<ul>
+<li>内存溢出。</li>
+<li>老生代容量太小，确实有数据存不下。</li>
+</ul>
+
+<p>由于重启后可以保持一段时间正常，且老生代增长并不是特别快，故排除可能内存溢出的可能性，我们准备通过调整jvm内存来修复。</p>
+
+<h3 id="toc_2">调整虚拟机内存大小</h3>
+
+<p>在使用容器时可以调整它的分配内存大小以获取更强的性能，具体操作方法是修改 <code>bin/catalina.sh</code> 文件中的 <code>JAVA_OPTS</code> 配置。</p>
+
+<p>具体如下</p>
+
+<pre><code>#JAVA_OPTS=&quot;$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`&quot;
+JAVA_OPTS=&quot;-Xms512m -Xmx1536m -XX:PermSize=256m -XX:MaxPermSize=512m -Xmn512m&quot;
+</code></pre>
+
+<blockquote>
+<p><strong>修改文件前请务必备份</strong></p>
+</blockquote>
+
+<p>各字段含义如下</p>
+
+<ul>
+<li>-Xms 初始内存容量</li>
+<li>-Xmx 最大内存容量</li>
+<li>-XX:PermSize 老生代初始容量</li>
+<li>-XX:MaxPermSize  老生代最大容量</li>
+<li>-Xmn 新生代容量</li>
+</ul>
+
+<p>修改后内容为：</p>
+
+<pre><code>JAVA_OPTS=&quot;-Xms1536m -Xmx1536m -XX:PermSize=256m -XX:MaxPermSize=512m -Xmn512m&quot;
+</code></pre>
+
+<h3 id="toc_3">正常FullGC记录</h3>
+
+<p>下面是一次正常的FullGC记录，Old区从99.91%回收至56.53%, FullGC时间为435ms, YangGC平均时间为15ms</p>
+
+<pre><code>  S0     S1     E      O      P     YGC     YGCT    FGC    FGCT     GCT 
+  0.00   9.62   9.90  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  13.23  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  14.02  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  36.24  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  50.07  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  51.67  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  51.79  99.91  29.16    443    6.892     0    0.000    6.892
+  0.00   9.62  77.47  99.91  29.16    443    6.892     0    0.000    6.892
+  8.14   0.00   0.00  99.96  29.16    444    6.906     1    0.000    6.906
+  0.00   0.00  10.75  56.53  29.16    444    6.906     1    0.435    7.341
+  0.00   0.00  13.19  56.53  29.16    444    6.906     1    0.435    7.341
+  0.00   0.00  16.94  56.53  29.16    444    6.906     1    0.435    7.341
+</code></pre>
+
+<h2 id="toc_4">深入学习虚拟机内存分区</h2>
+
+<h3 id="toc_5">虚拟机内存分区说明</h3>
+
+<p>分区情况如下图所示<br/>
+<img src="media/14845475779978/14846141584583.jpg" alt=""/></p>
+
+<p>其中：</p>
+
+<ul>
+<li>Young Generation 存储最新的对象</li>
+<li>Old Generation 存储老对象，经过多次回收都释放不掉的数据（官方叫法是tenured generation）</li>
+<li>Permanent Generation 存储虚拟机需要用到的class数据</li>
+<li>Code Cache 存储代码信息</li>
+</ul>
+
+<h3 id="toc_6">查看当前各区占用内存的大小</h3>
+
+<p>使用jmap命令可以查看虚拟机中的各区内存使用量。具体方法是：</p>
+
+<pre><code class="language-shell">wap@iZ2590mt68kZ:~/app/jdk1.7.0_79/bin$ jmap -heap 32429
+</code></pre>
+
+<blockquote>
+<p>32429 是进程的pid<br/>
+jmap 在java_home/bin目录下</p>
+</blockquote>
+
+<p>运行结果如下：</p>
+
+<pre><code>wap@iZ2590mt68kZ:~/app/jdk1.7.0_79/bin$ jmap -heap 32429
+Attaching to process ID 32429, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 24.79-b02
+
+using thread-local object allocation.
+Mark Sweep Compact GC
+
+Heap Configuration:
+   MinHeapFreeRatio = 40
+   MaxHeapFreeRatio = 70
+   MaxHeapSize      = 1610612736 (1536.0MB)
+   NewSize          = 1310720 (1.25MB)
+   MaxNewSize       = 17592186044415 MB
+   OldSize          = 5439488 (5.1875MB)
+   NewRatio         = 2
+   SurvivorRatio    = 8
+   PermSize         = 268435456 (256.0MB)
+   MaxPermSize      = 536870912 (512.0MB)
+   G1HeapRegionSize = 0 (0.0MB)
+
+Heap Usage:
+New Generation (Eden + 1 Survivor Space):
+   capacity = 161153024 (153.6875MB)
+   used     = 29450688 (28.08636474609375MB)
+   free     = 131702336 (125.60113525390625MB)
+   18.274983161346075% used
+Eden Space:
+   capacity = 143261696 (136.625MB)
+   used     = 28062800 (26.762771606445312MB)
+   free     = 115198896 (109.86222839355469MB)
+   19.58848790956656% used
+From Space:
+   capacity = 17891328 (17.0625MB)
+   used     = 1387888 (1.3235931396484375MB)
+   free     = 16503440 (15.738906860351562MB)
+   7.757322430173993% used
+To Space:
+   capacity = 17891328 (17.0625MB)
+   used     = 0 (0.0MB)
+   free     = 17891328 (17.0625MB)
+   0.0% used
+tenured generation:
+   capacity = 357957632 (341.375MB)
+   used     = 211810616 (201.99834442138672MB)
+   free     = 146147016 (139.37665557861328MB)
+   59.17197932519567% used
+Perm Generation:
+   capacity = 268435456 (256.0MB)
+   used     = 78553416 (74.91437530517578MB)
+   free     = 189882040 (181.08562469482422MB)
+   29.26342785358429% used
+
+24959 interned Strings occupying 3043064 bytes.
+</code></pre>
+
+<p>这份数据详细展示了当前各区的配置大小和使用率，可以根据它来调整我们的配置。比如：</p>
+
+<ul>
+<li><p>从结果可以看到我们Perm Generate才使用29%，而class相关的数据应该是比较稳定，所以在分配上存在一定的浪费。我们可以优化配置，让出更多的内存给业务侧。</p>
+
+<p>优化后，配置为:</p>
+
+<pre><code>JAVA_OPTS=&quot;-Xms1536m -Xmx1536m -XX:NewSize=128m -XX:MaxNewSize=768m  -XX:PermSize=128m -XX:MaxPermSize=128m&quot; 
+</code></pre>
+
+<blockquote>
+<p>我在使用jmap时出现了<code>Can&#39;t attach to the process</code> 错误，经过查证，可以通过修改系统配置的方式解决，具体方法参见<a href="http://learnworld.iteye.com/blog/1381949">参考链接：jmap报can not attach to the process 问题处理</a>。</p>
+</blockquote></li>
+</ul>
+
+<h3 id="toc_7">后期优化记录</h3>
+
+<p>由于我们系统内存只有2G，加上一些其它应用占用的内存，采用上述配置会出现内存被占满的情况，经过计算，将系统内存调整为：</p>
+
+<pre><code>JAVA_OPTS=&quot;-Xms1024m -Xmx1024m -XX:NewSize=128m -XX:MaxNewSize=768m  -XX:PermSize=128m -XX:MaxPermSize=128m &quot;
+</code></pre>
+
+<h2 id="toc_8">参考文献</h2>
+
+<p><a href="http://www.jvmhost.com/articles/how-can-i-monitor-memory-usage-of-my-tomcat-jvm">参考链接：jvmhost.com jvm内存设置</a></p>
+
+<p><a href="http://docs.oracle.com/javase/1.5.0/docs/guide/management/jconsole.html">参考链接：jsconsole查看JVM运行状态</a></p>
+
+<p><a href="http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html#remote">参考链接：设置远程监听查看虚拟机运行状态</a></p>
+
+<p><a href="http://docs.oracle.com/javase/7/docs/technotes/tools/share/jstat.html">参考链接：使用jstat查看当前jvm内存信息</a></p>
+
+<p><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/share/jmap.html">参考链接：使用jmap查看内存信息</a></p>
+
+<p><a href="http://learnworld.iteye.com/blog/1381949">参考链接：jmap报can not attach to the process 问题处理</a></p>
+
+
+		</div>
+	
+
+  
+  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+  </body>
+</html>
