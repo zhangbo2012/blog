@@ -4,14 +4,13 @@
   <title><![CDATA[编程之路]]></title>
   <link href="blog.codingroad.com/atom.xml" rel="self"/>
   <link href="blog.codingroad.com/"/>
-  <updated>2018-07-30T11:36:43+08:00</updated>
+  <updated>2018-07-30T12:15:12+08:00</updated>
   <id>blog.codingroad.com/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im">MWeb</generator>
-
+  <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
     <title type="html"><![CDATA[Python 串口加GUI编程【预告】]]></title>
@@ -135,6 +134,8 @@
 <p>最近老板爱上了吃鸡（手游：全军出击），经常拉着我们开黑，只能放弃午休的时间，陪老板在沙漠里奔波。</p>
 
 <p>上周在在微信游戏频道看战绩的时候突发奇想，是不是可以通过这个方式抓取到很多战斗数据，然后分析看看有什么规律。</p>
+
+<span id="more"></span><!-- more -->
 
 <p><img src="media/15310632907202/15311076652700.jpg" alt="" style="width:307px;"/></p>
 
@@ -979,6 +980,8 @@ if __name__ == &#39;__main__&#39;:
 
 <p>2017年底的时候因为爱人在老家待产，实在受不了背着沉重的2015版15寸MacBook Pro两头跑，所以打算买一台轻便的电脑。</p>
 
+<span id="more"></span><!-- more -->
+
 <h3 id="toc_2">使用场景分析</h3>
 
 <p>可能是因为做了太久运维，养成了背着电脑出门的习惯，哪怕是去KTV或者去逛街都要背上电脑才觉得心安，这样有紧急问题时可以随时打开电脑和手机热点上线处理。现在不做运维好几年了，但是这个毛病还是改不掉了。</p>
@@ -1138,6 +1141,8 @@ if __name__ == &#39;__main__&#39;:
     <content type="html"><![CDATA[
 <p>在连接时加上utf-8即可解决</p>
 
+<span id="more"></span><!-- more -->
+
 <pre><code class="language-python">
     def connect(self):
         if self.connected:
@@ -1186,6 +1191,24 @@ var duoshuoQuery = {short_name:&quot;codingroad&quot;};
     <updated>2017-02-06T09:06:41+08:00</updated>
     <id>blog.codingroad.com/om-ssl-config.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">配置自签发证书</a>
+</li>
+<li>
+<a href="#toc_1">根据url配置https</a>
+</li>
+<li>
+<a href="#toc_2">生成cer证书文件</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_3"></a>
+
+
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">配置自签发证书</h2>
 
 <ol>
@@ -1195,6 +1218,11 @@ var duoshuoQuery = {short_name:&quot;codingroad&quot;};
 </code></pre>
 
 <p>这样就可以在用户家目录下生成一个.keystore文件。在生成过程中需要设置一些必要的信息，其中密码信息一定要记住。</p></li>
+</ol>
+
+<!-- more -->
+
+<ol>
 <li><p>修改server.xml，配置证书。</p>
 
 <p>找到如下配置部分</p>
@@ -1358,6 +1386,8 @@ Certificate stored in file &lt;client.cer&gt;
 
 <hr/>
 
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">通过oss实现共享存储</h2>
 
 <h3 id="toc_1">需求</h3>
@@ -1371,6 +1401,8 @@ Certificate stored in file &lt;client.cer&gt;
 </ul>
 
 <p>由于该需求出现的时候，还没有NAS服务，经过研究发现可以使用阿里开源项目ossfs将oss挂载成本地目录，以实现这个需求，具体操作如下：</p>
+
+<!-- more -->
 
 <h3 id="toc_2">安装</h3>
 
@@ -1455,6 +1487,8 @@ h5@iZ2590mt68kZ:~$ ossfs sharedata /home/april/sharedata -ourl=http://oss-cn-bei
 
 
 <hr/>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_0">生成xml数据</h2>
 
@@ -1563,6 +1597,8 @@ if __name__ == &#39;__main__&#39;:
 </li>
 </ul>
 
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_0">根据ip段取所有ip</h2>
 
@@ -1679,6 +1715,8 @@ def _check_request(request):
 
 <hr/>
 
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">问题</h2>
 
 <p>写项目代码的时候，在配置上容易碰到下面三个问题：</p>
@@ -1695,6 +1733,8 @@ def _check_request(request):
 
 <pre><code>  使用环境变量来存储关键配置，或者主机相关环境配置信息
 </code></pre>
+
+<!-- more -->
 
 <h2 id="toc_2">示例</h2>
 
@@ -1742,6 +1782,26 @@ else:
     <updated>2017-03-29T21:54:14+08:00</updated>
     <id>blog.codingroad.com/python-django-asyn-task.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">业务场景</a>
+</li>
+<li>
+<a href="#toc_1">分析</a>
+</li>
+<li>
+<a href="#toc_2">Demo代码</a>
+</li>
+<li>
+<a href="#toc_3">实现效果</a>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
+<hr/>
+
 <h2 id="toc_0">业务场景</h2>
 
 <p>业务人员说合作方拿来了几本书的txt文件，需要导入平台，而且以后会是常态化的工作，需要开发功能来实现。</p>
@@ -1802,6 +1862,8 @@ def CreateTask(request):
     <updated>2017-04-06T21:33:37+08:00</updated>
     <id>blog.codingroad.com/python-send-email.html</id>
     <content type="html"><![CDATA[
+<span id="more"></span><!-- more -->
+
 <pre><code>#coding:utf-8
 __author__ = &#39;zhangbo&#39;
 
@@ -1847,6 +1909,45 @@ def send_html_email(reciver, title, html):
     <updated>2017-04-11T13:46:12+08:00</updated>
     <id>blog.codingroad.com/use-nginx-deploy-bottle-project.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">安装</a>
+</li>
+<li>
+<a href="#toc_1">配置</a>
+<ul>
+<li>
+<a href="#toc_2">uwsgi</a>
+</li>
+<li>
+<a href="#toc_3">nginx</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">启动</a>
+</li>
+<li>
+<a href="#toc_5">问题处理</a>
+<ul>
+<li>
+<a href="#toc_6">启动失败</a>
+</li>
+<li>
+<a href="#toc_7">nginx报连接upstream时权限不足</a>
+</li>
+<li>
+<a href="#toc_8">bottle运行时print中文时报错</a>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
+<hr/>
+
 <h2 id="toc_0">安装</h2>
 
 <pre><code>apt-get install  uwsgi uwsgi-plugin-python nginx
@@ -1946,6 +2047,10 @@ service nginx restart
 </ul>
 
 
+<hr/>
+
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">1、现象</h2>
 
 <p>在bottle项目中，自己使用mysqldb连接数据库来执行SQL，在程序启动的时候会初始化数据连接，然后全局共享这个连接。</p>
@@ -2002,6 +2107,23 @@ service nginx restart
     <updated>2017-04-21T11:15:15+08:00</updated>
     <id>blog.codingroad.com/monitor-dns-resove.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">新增信息收集脚本</a>
+</li>
+<li>
+<a href="#toc_1">增加crontab，每分钟收集一次</a>
+</li>
+<li>
+<a href="#toc_2">结果日志</a>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
+<hr/>
+
 <h2 id="toc_0">新增信息收集脚本</h2>
 
 <p>/root/script/dns/checkdns.sh</p>
@@ -2038,6 +2160,26 @@ echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOM
     <updated>2017-05-11T16:05:49+08:00</updated>
     <id>blog.codingroad.com/zhejiang-cmcc-http-status-hijacking.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">问题现象</a>
+</li>
+<li>
+<a href="#toc_1">问题分析</a>
+</li>
+<li>
+<a href="#toc_2">问题解决</a>
+</li>
+<li>
+<a href="#toc_3">其它分析</a>
+</li>
+</ul>
+
+
+<hr/>
+
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">问题现象</h2>
 
 <p>问题发现：网站改版升级后，原URL会失效，所以我们在tomcat中将404错误指向error.jsp页面，此页面加载后发起重定向到新的首页。</p>
@@ -2080,7 +2222,35 @@ echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOM
     <updated>2017-05-17T17:31:37+08:00</updated>
     <id>blog.codingroad.com/wechat-multiple-requst.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">现象</a>
+</li>
+<li>
+<a href="#toc_1">问题定位</a>
+<ul>
+<li>
+<a href="#toc_2">定位思路：</a>
+</li>
+<li>
+<a href="#toc_3">定位过程</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_4">问题分析</a>
+</li>
+<li>
+<a href="#toc_5">问题处理</a>
+</li>
+</ul>
+
+
 <p>这是一个大坑，可能有人还没有注意到这个问题，但它确实存在，而且可能会影响你的统计数据。</p>
+
+<span id="more"></span><!-- more -->
+
+<hr/>
 
 <h2 id="toc_0">现象</h2>
 
@@ -2236,6 +2406,8 @@ echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOM
 
 <p>以前折腾过一次部署zabbix环境，觉得比较麻烦，特别是php环境，当时不是很熟悉，折腾了很久。<br/>
 现在我们的业务上也需要zabbix，在部署的时候首先想到的就是能不能用docker来实现快速部署，查了一些资料，发现真的可行，于是便在自己的虚拟机上搭了一套。说明如下</p>
+
+<span id="more"></span><!-- more -->
 
 <h2 id="toc_0">环境</h2>
 
@@ -2441,6 +2613,21 @@ services:
     <updated>2017-08-14T15:56:56+08:00</updated>
     <id>blog.codingroad.com/python-django-csrf-form.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">template层</a>
+</li>
+<li>
+<a href="#toc_1">view层</a>
+</li>
+<li>
+<a href="#toc_2">settings</a>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">template层</h2>
 
 <pre><code class="language-html">&lt;form class=&quot;form-horizontal&quot; method=&quot;post&quot; id=&quot;iptFrm&quot; action=&quot;{%url &#39;api_import_post&#39; %}&quot;&gt;{% csrf_token %}
@@ -2470,6 +2657,21 @@ def import_post(request):
     <updated>2017-08-14T16:01:55+08:00</updated>
     <id>blog.codingroad.com/python-django-template-repeat.html</id>
     <content type="html"><![CDATA[
+<ul>
+<li>
+<a href="#toc_0">需求</a>
+</li>
+<li>
+<a href="#toc_1">方法</a>
+</li>
+<li>
+<a href="#toc_2">More</a>
+</li>
+</ul>
+
+
+<span id="more"></span><!-- more -->
+
 <h2 id="toc_0">需求</h2>
 
 <p>如下图标红框的区块所示，我在blog的文章列表页，每行要显示2个文章。</p>

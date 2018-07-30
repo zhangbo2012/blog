@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
   <loc>blog.codingroad.com/</loc>
-  <lastmod>2018-07-30T11:36:50+08:00</lastmod>
+  <lastmod>2018-07-30T12:20:20+08:00</lastmod>
 </url>
 
 <url>
@@ -110,6 +110,11 @@
   <lastmod>2017-07-30T11:06:54+08:00</lastmod>
 </url>
 
+
+<url>
+  <loc>blog.codingroad.com/about.html</loc>
+  <lastmod>2018-07-30T12:12:16+08:00</lastmod>
+</url>
 
 
 <url>
