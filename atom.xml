@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[编程之路]]></title>
+  <title><![CDATA[CodingRoad-编程之路]]></title>
   <link href="blog.codingroad.com/atom.xml" rel="self"/>
   <link href="blog.codingroad.com/"/>
-  <updated>2018-07-30T12:15:12+08:00</updated>
+  <updated>2018-07-30T12:20:21+08:00</updated>
   <id>blog.codingroad.com/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -1384,8 +1384,6 @@ Certificate stored in file &lt;client.cer&gt;
 </ul>
 
 
-<hr/>
-
 <span id="more"></span><!-- more -->
 
 <h2 id="toc_0">通过oss实现共享存储</h2>
@@ -1485,8 +1483,6 @@ h5@iZ2590mt68kZ:~$ ossfs sharedata /home/april/sharedata -ourl=http://oss-cn-bei
 </li>
 </ul>
 
-
-<hr/>
 
 <span id="more"></span><!-- more -->
 
@@ -1713,8 +1709,6 @@ def _check_request(request):
 </ul>
 
 
-<hr/>
-
 <span id="more"></span><!-- more -->
 
 <h2 id="toc_0">问题</h2>
@@ -1799,8 +1793,6 @@ else:
 
 
 <span id="more"></span><!-- more -->
-
-<hr/>
 
 <h2 id="toc_0">业务场景</h2>
 
@@ -2047,8 +2039,6 @@ service nginx restart
 </ul>
 
 
-<hr/>
-
 <span id="more"></span><!-- more -->
 
 <h2 id="toc_0">1、现象</h2>
@@ -2122,8 +2112,6 @@ service nginx restart
 
 <span id="more"></span><!-- more -->
 
-<hr/>
-
 <h2 id="toc_0">新增信息收集脚本</h2>
 
 <p>/root/script/dns/checkdns.sh</p>
@@ -2175,8 +2163,6 @@ echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOM
 </li>
 </ul>
 
-
-<hr/>
 
 <span id="more"></span><!-- more -->
 
@@ -2249,8 +2235,6 @@ echo &quot;`date &quot;+%Y-%m-%d %H:%M:%S&quot;`;   `dig ${DOMAIN}  | grep ${DOM
 <p>这是一个大坑，可能有人还没有注意到这个问题，但它确实存在，而且可能会影响你的统计数据。</p>
 
 <span id="more"></span><!-- more -->
-
-<hr/>
 
 <h2 id="toc_0">现象</h2>
 
